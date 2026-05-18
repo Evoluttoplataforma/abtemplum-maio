@@ -36,14 +36,25 @@
     "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
     // UTMs novos (GA4 / Meta)
     "utm_id", "utm_source_platform", "utm_creative_format", "utm_marketing_tactic",
-    // Click IDs
-    "gclid", "gbraid", "wbraid", "dclid",      // Google
-    "fbclid",                                    // Facebook / Instagram
-    "msclkid",                                   // Microsoft / Bing
-    "ttclid",                                    // TikTok
-    "li_fat_id",                                 // LinkedIn
-    "twclid",                                    // X / Twitter
-    "irclickid",                                 // Impact
+    // Google
+    "gclid", "gbraid", "wbraid", "dclid",
+    "gad_source", "gad_campaignid",
+    // Facebook / Instagram
+    "fbclid",
+    // Microsoft / Bing
+    "msclkid",
+    // TikTok
+    "ttclid",
+    // LinkedIn
+    "li_fat_id",
+    // X / Twitter
+    "twclid",
+    // Impact
+    "irclickid",
+    // Taboola
+    "tblci",
+    // Systeme / outros
+    "sck",
   ];
 
   // ---- Captura UTMs + Click IDs do query string, com persistência ----
