@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System — Templum · Ação PBQP-H</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <meta name="theme-color" content="#FF5925" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <style>
+    /* =========================================================
+       TOKENS — Templum Brand colors + Aura/Green-Museum refined patterns
+       ========================================================= */
+    :root {
+      /* Brand · Orange (Templum) */
+      --orange-dark:  #AF4022;
+      --orange:       #FF5925;
+      --peach:        #FDA47D;
+      --peach-light:  #FDD88C;
+      --cream:        #FFF4DD;
+      --cream-2:      #FFFAEB;
+
+      /* Brand · Yellow */
+      --yellow:        #FDB73F;
+      --yellow-bright: #FFEE0D;
+
+      /* Brand · Dark */
+      --black:        #000000;
+      --navy:         #222831;
+      --navy-2:       #2D343E;
+      --brown-deep:   #4F251B;
+      --brown-pbqp:   #7F2611;
+
+      /* Surfaces (Aura-style) */
+      --bg:           #FFFAEB;        /* page warm */
+      --surface:      #FFFFFF;        /* paper */
+      --surface-glass:rgba(255,255,255,0.92);
+      --surface-warm: #FFF4DD;
+      --surface-deep: #1A1F26;        /* darker than navy for big sections */
+
+      /* Text — neutrals (zinc-900 equivalents) */
+      --text:         #18191B;
+      --text-2:       #3F424B;
+      --text-mid:     rgba(24,25,27,0.62);
+      --text-soft:    rgba(24,25,27,0.42);
+      --text-faint:   rgba(24,25,27,0.18);
+
+      /* Borders */
+      --border:       rgba(24,25,27,0.08);
+      --border-2:     rgba(24,25,27,0.14);
+      --border-3:     rgba(24,25,27,0.22);
+      --border-onDark:rgba(255,244,221,0.14);
+
+      /* Feedback */
+      --success: #16A34A;
+      --danger:  #DC2626;
+
+      /* Type */
+      --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      /* Radii (Aura uses 2.5rem on big panels) */
+      --r-12: 12px;
+      --r-16: 16px;
+      --r-20: 20px;
+      --r-24: 24px;
+      --r-32: 32px;
+      --r-40: 40px;   /* 2.5rem */
+      --r-arch: 7rem; /* green-museum arched cards */
+
+      /* Shadows */
+      --shadow-soft: 0 1px 2px rgba(24,25,27,0.04), 0 6px 16px rgba(24,25,27,0.05);
+      --shadow-card: 0 1px 2px rgba(24,25,27,0.04), 0 12px 32px rgba(24,25,27,0.08);
+      --shadow-lift: 0 28px 56px -16px rgba(24,25,27,0.18), 0 12px 28px -12px rgba(24,25,27,0.10);
+      --shadow-cta:  0 15px 25px -10px rgba(255,89,37,0.55), inset 0 4px 8px rgba(253,221,138,0.55), inset 0 -4px 8px rgba(255,89,37,0.55);
+      --shadow-cta-hover: 0 18px 30px -10px rgba(255,89,37,0.65), inset 0 4px 8px rgba(253,221,138,0.65), inset 0 -4px 8px rgba(255,89,37,0.65);
+
+      /* Easings (Aura) */
+      --ease-soft: cubic-bezier(.22, 1, .36, 1);
+      --ease-snap: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      scroll-padding-top: 80px;
+    }
+    body {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-sans);
+      color: var(--text);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+    iconify-icon { display: inline-flex; }
+    strong, b { font-weight: 600; }
+
+    /* =========================================================
+       CONTAINER (Aura: max-w-[1300px])
+       ========================================================= */
+    .container { width: 100%; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    .container.xl { max-width: 1300px; }
+    .container.lg { max-width: 1180px; }
+    .container.md { max-width: 1024px; }
+    .container.sm { max-width: 760px; }
+
+    /* =========================================================
+       BRAND LOGO
+       ========================================================= */
+    .templum-logo {
+      display: inline-flex; align-items: baseline; gap: 3px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      line-height: 1;
+    }
+    .templum-logo .bang { color: var(--orange); }
+    .templum-logo.onDark { color: var(--cream); }
+
+    /* =========================================================
+       DS NAV
+       ========================================================= */
+    .ds-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 250, 235, 0.85);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .ds-nav-inner { display: flex; align-items: center; gap: 24px; padding: 14px 24px; max-width: 1300px; margin: 0 auto; flex-wrap: wrap; }
+    .ds-nav ul { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+    .ds-nav a {
+      padding: 8px 14px; border-radius: 999px;
+      font-size: 13px; font-weight: 500; color: var(--text-2);
+      transition: background .25s var(--ease-soft), color .25s var(--ease-soft);
+    }
+    .ds-nav a:hover { background: rgba(255,89,37,0.08); color: var(--orange); }
+
+    /* =========================================================
+       HERO — Aura glass-panel + Green-Museum split + arched image
+       ========================================================= */
+    .hero {
+      padding: 24px 0 0 0;
+      background:
+        radial-gradient(1100px 600px at 50% -10%, rgba(255,89,37,0.08), transparent 60%),
+        var(--bg);
+    }
+    .hero-panel {
+      position: relative;
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-40);
+      padding: 40px 48px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 18px 6px 6px;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 32px;
+    }
+    .hero-pill .avatars { display: flex; }
+    .hero-pill .av {
+      width: 28px; height: 28px; border-radius: 999px;
+      border: 2px solid #fff;
+      margin-right: -8px;
+      display: grid; place-items: center;
+      font-size: 11px; font-weight: 700; color: #fff;
+      background: linear-gradient(135deg, var(--peach), var(--orange));
+    }
+    .hero-pill .av:nth-child(2) { background: linear-gradient(135deg, var(--peach-light), var(--peach)); color: var(--brown-deep); }
+    .hero-pill .av:nth-child(3) { background: var(--navy); }
+    .hero-pill .av:last-child { margin-right: 0; }
+    .hero-pill .text { font-size: 12px; font-weight: 500; color: var(--text-2); }
+    .hero-pill .text strong { font-weight: 600; color: var(--text); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-content { display: flex; flex-direction: column; gap: 28px; max-width: 620px; }
+    .hero-headline {
+      font-family: var(--font-sans);
+      font-weight: 500;                         /* Aura uses font-medium */
+      font-size: clamp(40px, 5vw, 80px);        /* Aura: 5xl → 5rem(80px) */
+      line-height: 0.95;
+      letter-spacing: -0.035em;                 /* tracking-tighter */
+      color: var(--text);
+    }
+    .hero-headline em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-subhead {
+      font-size: 17px; line-height: 1.55; color: var(--text-mid);
+      max-width: 520px; font-weight: 400;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    /* Stats inline (Aura curve-separated style) */
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; margin-top: 8px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+    .hero-stat { padding: 0 20px; border-right: 1px solid var(--border); }
+    .hero-stat:first-child { padding-left: 0; }
+    .hero-stat:last-child  { padding-right: 0; border-right: 0; }
+    .hero-stat .num {
+      font-family: var(--font-sans); font-weight: 700;
+      font-size: 28px; line-height: 1; letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .hero-stat .num em { color: var(--orange); font-style: normal; }
+    .hero-stat .lbl {
+      font-size: 11px; font-weight: 600; color: var(--text-mid);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px;
+    }
+
+    /* Hero image (Green-Museum arched-top + Aura hover scale) */
+    .hero-imageCol { position: relative; }
+    .hero-imageCard {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--r-arch) var(--r-arch) var(--r-24) var(--r-24);
+      overflow: hidden;
+      background: var(--peach);
+      box-shadow: var(--shadow-lift);
+    }
+    .hero-imageCard img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1.6s var(--ease-soft), filter 1.2s var(--ease-soft);
+      filter: saturate(0.92);
+    }
+    .hero-imageCard:hover img { transform: scale(1.04); filter: saturate(1); }
+    .hero-imageCard::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
+      background: linear-gradient(to top, rgba(24,25,27,0.55), transparent);
+    }
+    .hero-imageCaption {
+      position: absolute; left: 22px; right: 22px; bottom: 22px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      color: var(--cream); z-index: 2;
+    }
+    .hero-imageCaption .label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; }
+    .hero-imageCaption .title { font-family: var(--font-sans); font-weight: 500; font-size: 18px; line-height: 1.15; letter-spacing: -0.01em; }
+
+    /* Floating mini card (Aura) */
+    .hero-floating {
+      position: absolute; left: -18px; bottom: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-16);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-card);
+      transform: rotate(-4deg);
+      transition: transform .6s var(--ease-soft);
+      max-width: 200px;
+      z-index: 3;
+    }
+    .hero-floating:hover { transform: rotate(0); }
+    .hero-floating .stat {
+      font-family: var(--font-sans); font-weight: 800;
+      font-size: 28px; line-height: 0.95; color: var(--orange);
+      letter-spacing: -0.035em;
+    }
+    .hero-floating .label {
+      font-size: 11px; font-weight: 500; color: var(--text-mid); margin-top: 4px; line-height: 1.4;
+    }
+
+    /* =========================================================
+       BUTTON (Aura primary: orange radial gradient + inset shadow)
+       ========================================================= */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-sans); font-weight: 500; font-size: 14px;
+      letter-spacing: -0.005em;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform .35s var(--ease-soft), background .35s var(--ease-soft), color .35s var(--ease-soft), box-shadow .35s var(--ease-soft), border-color .35s var(--ease-soft);
+      white-space: nowrap;
+    }
+    .btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+    .btn iconify-icon { font-size: 16px; transition: transform .55s var(--ease-soft); }
+    .btn:hover iconify-icon { transform: translateX(3px); }
+
+    .btn--primary {
+      background: radial-gradient(120% 140% at 50% 0%, #FED7AA 0%, #FB923C 38%, #FF5925 100%);
+      color: #FFF8F0;
+      box-shadow: var(--shadow-cta);
+    }
+    .btn--primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-cta-hover); }
+
+    .btn--dark {
+      background: var(--navy);
+      color: var(--cream);
+    }
+    .btn--dark:hover { background: var(--navy-2); transform: translateY(-1px); }
+
+    .btn--ghost {
+      background: rgba(255,255,255,0.6);
+      color: var(--text);
+      border-color: var(--border-2);
+    }
+    .btn--ghost:hover { background: var(--surface); border-color: var(--border-3); }
+
+    .btn--ghost-onDark {
+      background: rgba(255,244,221,0.08);
+      color: var(--cream);
+      border-color: rgba(255,244,221,0.20);
+    }
+    .btn--ghost-onDark:hover { background: rgba(255,244,221,0.14); }
+
+    .btn--lg { padding: 14px 26px; font-size: 15px; }
+    .btn--xl { padding: 16px 30px; font-size: 16px; }
+    .btn--sm { padding: 9px 16px; font-size: 13px; }
+
+    .btn--icon {
+      width: 44px; height: 44px; padding: 0;
+      border-radius: 999px;
+      display: inline-grid; place-items: center;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn--icon:hover { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+    .btn--icon iconify-icon { font-size: 18px; }
+
+    .btn--disabled { opacity: .45; pointer-events: none; }
+
+    /* =========================================================
+       BADGES & STATUS
+       ========================================================= */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.06em; line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap; width: fit-content;
+    }
+    .badge--default { background: rgba(24,25,27,0.06); color: var(--text); }
+    .badge--orange  { background: rgba(255,89,37,0.10); color: var(--orange); }
+    .badge--orange-solid { background: var(--orange); color: var(--cream); }
+    .badge--cream   { background: var(--cream); color: var(--text); }
+    .badge--navy    { background: var(--navy); color: var(--cream); }
+    .badge--yellow  { background: var(--yellow); color: var(--navy); }
+    .badge--peach   { background: var(--peach); color: var(--brown-deep); }
+    .badge--pbqp    { background: var(--brown-pbqp); color: var(--cream); }
+
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      font-family: var(--font-sans);
+      font-size: 11px; font-weight: 600;
+      color: var(--text);
+      text-transform: uppercase; letter-spacing: 0.10em;
+    }
+    .status-dot { position: relative; width: 8px; height: 8px; border-radius: 999px; background: var(--success); }
+    .status-dot::after {
+      content: ""; position: absolute; inset: 0; border-radius: 999px;
+      background: var(--success); animation: pulse 1.8s ease-out infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+
+    /* =========================================================
+       SECTIONS
+       ========================================================= */
+    .ds-section { padding: 96px 0; border-top: 1px solid var(--border); }
+    .ds-section h2 {
+      font-family: var(--font-sans);
+      font-weight: 500;                          /* matches Aura section h2 */
+      font-size: clamp(32px, 4vw, 56px);
+      letter-spacing: -0.035em;
+      line-height: 0.96;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .ds-section h2 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ds-section .ds-lede {
+      font-size: 17px; color: var(--text-mid);
+      max-width: 620px; margin-bottom: 56px;
+      line-height: 1.55; font-weight: 400;
+    }
+    .ds-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .ds-eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+
+    /* =========================================================
+       TYPOGRAPHY SPEC TABLE
+       ========================================================= */
+    .ds-type-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 28px 0; border-bottom: 1px dashed var(--border-2);
+      gap: 32px;
+    }
+    .ds-type-row:last-child { border-bottom: 0; }
+    .ds-type-meta { display: flex; flex-direction: column; gap: 4px; min-width: 220px; flex-shrink: 0; }
+    .ds-type-meta strong { font-family: var(--font-sans); font-size: 11px; color: var(--text-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+    .ds-type-meta code { font-size: 12px; color: var(--text-soft); }
+    .ds-type-spec { font-family: ui-monospace, monospace; font-size: 11px; color: var(--text-soft); white-space: nowrap; text-align: right; }
+    .ds-type-preview { flex: 1; padding: 0 12px; min-width: 0; }
+
+    /* =========================================================
+       TYPOGRAPHY CLASSES — Aura-inspired sizes, Templum Montserrat
+       ========================================================= */
+    .display-1 {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.94; letter-spacing: -0.04em;
+      color: var(--text);
+    }
+    .display-2 {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: clamp(44px, 5.4vw, 80px);
+      line-height: 0.95; letter-spacing: -0.035em;
+      color: var(--text);
+    }
+    .h1 {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: clamp(36px, 4.4vw, 64px);
+      line-height: 0.98; letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .h2 {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: clamp(30px, 3.6vw, 48px);
+      line-height: 1; letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .h3 {
+      font-family: var(--font-sans); font-weight: 600;
+      font-size: clamp(22px, 2.4vw, 32px);
+      line-height: 1.1; letter-spacing: -0.022em;
+      color: var(--text);
+    }
+    .h4 {
+      font-family: var(--font-sans); font-weight: 600;
+      font-size: 20px;
+      line-height: 1.2; letter-spacing: -0.018em;
+      color: var(--text);
+    }
+    .bold-l { font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .bold-m { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .bold-s { font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .paragraph { font-family: var(--font-sans); font-size: 17px; font-weight: 400; line-height: 1.6; color: var(--text-2); }
+    .reg-l    { font-family: var(--font-sans); font-size: 15px; font-weight: 400; line-height: 1.55; color: var(--text-2); }
+    .reg-m    { font-family: var(--font-sans); font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--text-mid); }
+    .reg-s    { font-family: var(--font-sans); font-size: 12px; font-weight: 400; line-height: 1.5; color: var(--text-mid); }
+    .label-caps {
+      font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid);
+    }
+
+    /* =========================================================
+       SWATCHES
+       ========================================================= */
+    .ds-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+    .ds-swatch { border: 1px solid var(--border); border-radius: var(--r-16); overflow: hidden; background: var(--surface); }
+    .ds-swatch .swatch-color { height: 88px; }
+    .ds-swatch .swatch-meta { padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
+    .ds-swatch .swatch-name { font-weight: 600; font-size: 13px; color: var(--text); font-family: var(--font-sans); }
+    .ds-swatch .swatch-hex  { font-size: 11px; color: var(--text-mid); font-family: ui-monospace, monospace; }
+    .ds-swatch .swatch-role { font-size: 10px; color: var(--text-soft); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+    /* Surfaces */
+    .ds-surface-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .ds-surface { border-radius: var(--r-20); padding: 28px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; }
+    .ds-surface .surface-label { font-family: var(--font-sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; }
+    .ds-surface .surface-name  { font-family: var(--font-sans); font-weight: 500; font-size: 14px; }
+    .surface-bg     { background: var(--bg);          border: 1px solid var(--border); color: var(--text); }
+    .surface-cream  { background: var(--cream);        border: 1px solid var(--border); color: var(--text); }
+    .surface-paper  { background: var(--surface);      border: 1px solid var(--border); color: var(--text); }
+    .surface-glass  { background: var(--surface-glass); border: 1px solid var(--border); color: var(--text); backdrop-filter: blur(12px); }
+    .surface-orange { background: var(--orange);       color: var(--cream); }
+    .surface-navy   { background: var(--navy);         color: var(--cream); }
+    .surface-pbqp   { background: var(--brown-pbqp);   color: var(--cream); }
+
+    /* =========================================================
+       COMPONENTS
+       ========================================================= */
+    .ds-component { padding: 32px; border: 1px solid var(--border); border-radius: var(--r-24); background: var(--surface); }
+    .ds-component + .ds-component { margin-top: 16px; }
+    .ds-component h3 { font-family: var(--font-sans); font-weight: 500; font-size: 22px; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .ds-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .ds-row + .ds-row { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+    .ds-label {
+      font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+      color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.12em; min-width: 100px;
+    }
+
+    /* Stat card */
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-20);
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .45s var(--ease-soft), box-shadow .45s var(--ease-soft), border-color .45s var(--ease-soft);
+      min-height: 200px;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); border-color: var(--border-2); }
+    .stat-card .num {
+      font-family: var(--font-sans);
+      font-weight: 700;                            /* not 800 */
+      font-size: clamp(40px, 4.4vw, 64px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      color: var(--text);
+      margin-top: auto;
+    }
+    .stat-card .num em { color: var(--orange); font-style: normal; }
+    .stat-card .lbl {
+      font-family: var(--font-sans); font-size: 13px; color: var(--text-mid);
+      line-height: 1.5; font-weight: 400;
+    }
+    .stat-card.--orange { background: var(--orange); border: 0; color: var(--cream); }
+    .stat-card.--orange .num { color: var(--cream); }
+    .stat-card.--orange .num em { color: var(--navy); }
+    .stat-card.--orange .lbl { color: var(--cream); opacity: 0.92; }
+    .stat-card.--orange .label-caps { color: var(--cream); opacity: 0.85; }
+    .stat-card.--navy { background: var(--navy); border: 0; color: var(--cream); }
+    .stat-card.--navy .num { color: var(--cream); }
+    .stat-card.--navy .num em { color: var(--orange); }
+    .stat-card.--navy .lbl { color: var(--cream); opacity: 0.85; }
+    .stat-card.--navy .label-caps { color: var(--peach-light); }
+
+    /* Step card */
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-20);
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      min-height: 220px;
+      transition: transform .5s var(--ease-soft), border-color .5s var(--ease-soft);
+    }
+    .step-card:hover { transform: translateY(-3px); border-color: var(--orange); }
+    .step-card .step-num {
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,89,37,0.10); color: var(--orange);
+      display: grid; place-items: center;
+      font-family: var(--font-sans); font-weight: 700; font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .step-card .step-title {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: 22px; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .step-card .step-text {
+      font-family: var(--font-sans); font-size: 14px;
+      color: var(--text-mid); line-height: 1.55; font-weight: 400;
+    }
+
+    /* Checklist */
+    .check-list { display: flex; flex-direction: column; gap: 12px; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 1.5; color: var(--text); font-weight: 400; }
+    .check-item strong { font-weight: 600; }
+    .check-circle, .check-cross {
+      width: 26px; height: 26px; min-width: 26px;
+      border-radius: 999px;
+      display: grid; place-items: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .check-circle { background: rgba(255,89,37,0.10); color: var(--orange); }
+    .check-cross  { background: rgba(220,38,38,0.10); color: var(--danger); }
+    .check-circle iconify-icon, .check-cross iconify-icon { font-size: 15px; }
+
+    /* Image card */
+    .image-card {
+      position: relative; aspect-ratio: 1 / 1;
+      border-radius: var(--r-32);
+      overflow: hidden;
+      background: var(--peach);
+      box-shadow: var(--shadow-lift);
+    }
+    .image-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 1.6s var(--ease-soft), filter 1.2s var(--ease-soft);
+      filter: saturate(0.92);
+    }
+    .image-card:hover img { transform: scale(1.04); filter: saturate(1); }
+    .image-card::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 50%;
+      background: linear-gradient(to top, rgba(24,25,27,0.55), transparent);
+    }
+    .image-card .caption {
+      position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 2;
+      color: var(--cream);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .image-card .caption .label { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; }
+    .image-card .caption .title { font-family: var(--font-sans); font-weight: 500; font-size: 22px; line-height: 1.1; letter-spacing: -0.02em; }
+    .image-card .floating-badge { position: absolute; top: 22px; left: 22px; z-index: 2; }
+
+    /* CTA Dark */
+    .cta-dark {
+      position: relative;
+      background: var(--surface-deep);
+      color: var(--cream);
+      border-radius: var(--r-32);
+      padding: 56px;
+      overflow: hidden;
+    }
+    .cta-dark::before {
+      content: ""; position: absolute;
+      width: 360px; height: 360px;
+      right: -100px; top: 50%; transform: translateY(-50%);
+      background: radial-gradient(circle, rgba(255,89,37,0.30), transparent 60%);
+      pointer-events: none;
+    }
+    .cta-dark > * { position: relative; z-index: 1; }
+    .cta-dark h3 {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: clamp(28px, 3.6vw, 48px);
+      color: var(--cream); line-height: 1; letter-spacing: -0.03em;
+      max-width: 720px; margin-bottom: 20px;
+    }
+    .cta-dark h3 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--orange), var(--peach));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .cta-dark p { color: rgba(255,244,221,0.78); max-width: 560px; margin-bottom: 24px; line-height: 1.6; font-weight: 400; font-size: 16px; }
+    .cta-dark .check-circle { background: rgba(255,89,37,0.20); color: var(--orange); }
+    .cta-dark .check-item { color: var(--cream); }
+
+    /* FAQ */
+    .faq-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-24); padding: 4px 28px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: 0; }
+    .faq-question {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; padding: 22px 0;
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: 17px; line-height: 1.3; letter-spacing: -0.015em;
+      color: var(--text); text-align: left; cursor: pointer; list-style: none;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question iconify-icon { font-size: 22px; color: var(--text-mid); transition: transform .3s var(--ease-soft); flex-shrink: 0; }
+    .faq-item[open] .faq-question iconify-icon { transform: rotate(180deg); color: var(--orange); }
+    .faq-answer { padding: 0 0 22px 0; font-size: 15px; color: var(--text-mid); line-height: 1.6; max-width: 760px; font-weight: 400; }
+
+    /* Marquee */
+    .marquee {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      background: var(--bg);
+    }
+    .marquee-track {
+      display: flex; gap: 48px; width: max-content;
+      animation: marquee 36s linear infinite;
+      align-items: center;
+    }
+    .marquee-track span {
+      font-family: var(--font-sans); font-weight: 500;
+      font-size: 22px; letter-spacing: -0.02em; line-height: 1;
+      color: var(--text); white-space: nowrap;
+    }
+    .marquee-track span.--orange { color: var(--orange); }
+    .marquee-track .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--orange); flex-shrink: 0; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* =========================================================
+       LAYOUT VISUALIZERS
+       ========================================================= */
+    .ds-grid-demo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; }
+    .ds-grid-demo > div { background: rgba(255,89,37,0.08); border: 1px dashed rgba(255,89,37,0.4); height: 40px; border-radius: 6px; }
+    .ds-spacing-bar { display: flex; align-items: flex-end; gap: 12px; }
+    .ds-spacing-tick { background: var(--peach); border: 1px solid var(--orange); border-radius: 6px; min-width: 8px; }
+    .ds-spacing-label { font-size: 11px; color: var(--text-mid); text-align: center; margin-top: 8px; font-family: var(--font-sans); font-weight: 500; }
+    .ds-container-demo {
+      border: 1px dashed var(--border-3); border-radius: var(--r-16);
+      padding: 18px; text-align: center; font-family: ui-monospace, monospace; font-size: 12px;
+      color: var(--text-mid); margin-bottom: 8px; background: var(--surface);
+    }
+
+    /* =========================================================
+       MOTION GALLERY
+       ========================================================= */
+    .ds-motion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .ds-motion-card {
+      padding: 26px; border-radius: var(--r-20);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex; flex-direction: column; gap: 16px; min-height: 220px;
+    }
+    .ds-motion-card .label { font-family: var(--font-sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-mid); }
+    .ds-motion-card .meta { font-family: ui-monospace, monospace; font-size: 11px; color: var(--text-soft); }
+    .demo-spin {
+      width: 60px; height: 60px; border-radius: 999px;
+      background: conic-gradient(from 0deg, var(--orange), var(--peach), var(--orange));
+      animation: spin 16s linear infinite;
+      align-self: flex-start;
+    }
+    @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+    .demo-pulse { display: flex; align-items: center; gap: 12px; align-self: flex-start; }
+    .demo-pulse .pulse-dot {
+      position: relative; width: 10px; height: 10px; border-radius: 999px; background: var(--success);
+    }
+    .demo-pulse .pulse-dot::after {
+      content: ""; position: absolute; inset: 0; border-radius: 999px;
+      background: var(--success); animation: pulse 1.8s ease-out infinite;
+    }
+    .demo-lift {
+      display: inline-block; padding: 10px 20px; border-radius: 999px;
+      background: var(--navy); color: var(--cream); font-weight: 500; font-size: 14px;
+      transition: transform .35s var(--ease-soft), background .35s var(--ease-soft);
+      align-self: flex-start;
+    }
+    .demo-lift:hover { transform: translateY(-2px); background: var(--orange); }
+    .demo-arrow { display: inline-flex; align-items: center; gap: 6px; color: var(--orange); font-weight: 500; font-size: 14px; align-self: flex-start; }
+    .demo-arrow iconify-icon { font-size: 18px; transition: transform .55s var(--ease-soft); }
+    .demo-arrow:hover iconify-icon { transform: translateX(6px); }
+    .demo-imgWrap {
+      position: relative; aspect-ratio: 4/3; border-radius: var(--r-16);
+      overflow: hidden; background: var(--peach);
+    }
+    .demo-imgWrap .demo-img {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      filter: grayscale(0.6) saturate(0.8);
+      transition: transform 1.4s var(--ease-soft), filter 1.2s var(--ease-soft);
+    }
+    .demo-imgWrap:hover .demo-img { transform: scale(1.06); filter: grayscale(0) saturate(1); }
+
+    /* Vertical carousel (Aura signature) */
+    .demo-vScroll {
+      height: 96px; overflow: hidden;
+      mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%);
+    }
+    .demo-vScroll .track {
+      display: flex; flex-direction: column; gap: 8px;
+      animation: vscroll 12s var(--ease-snap) infinite;
+    }
+    .demo-vScroll .track > div {
+      padding: 10px 14px; border-radius: 12px; background: rgba(24,25,27,0.05);
+      font-size: 13px; color: var(--text); font-weight: 500;
+    }
+    @keyframes vscroll {
+      0%, 25% { transform: translateY(0); }
+      33%, 58% { transform: translateY(-33.33%); }
+      66%, 91% { transform: translateY(-66.66%); }
+      100% { transform: translateY(0); }
+    }
+
+    /* =========================================================
+       ICONS
+       ========================================================= */
+    .ds-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+    .ds-icon-tile {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      padding: 18px 12px; border-radius: var(--r-16);
+      background: var(--surface); border: 1px solid var(--border);
+      transition: background .3s var(--ease-soft), transform .3s var(--ease-soft), border-color .3s var(--ease-soft);
+    }
+    .ds-icon-tile:hover { transform: translateY(-2px); border-color: var(--orange); }
+    .ds-icon-tile iconify-icon { font-size: 26px; color: var(--text); }
+    .ds-icon-tile .ds-icon-name { font-size: 10px; color: var(--text-mid); font-family: ui-monospace, monospace; text-align: center; }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .hero-panel { padding: 28px 24px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-imageCol { max-width: 460px; margin: 0 auto; width: 100%; }
+      .hero-floating { left: 8px; }
+    }
+    @media (max-width: 768px) {
+      .ds-section { padding: 64px 0; }
+      .ds-section h2 { font-size: 32px; }
+      .hero-headline { font-size: 38px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .ds-type-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .ds-type-spec { text-align: left; }
+      .ds-type-preview { padding: 0; }
+      .cta-dark { padding: 32px; }
+      .ds-component { padding: 22px; }
+      .marquee-track span { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+       NAV
+       ===================================================== -->
+  <nav class="ds-nav">
+    <div class="ds-nav-inner">
+      <a href="#hero" class="templum-logo">
+        Templum<span class="bang">!</span>
+        <span style="font-weight:400; font-size:12px; color:var(--text-mid); margin-left:10px; letter-spacing:0;">/ DS Ação PBQP-H</span>
+      </a>
+      <ul>
+        <li><a href="#hero">Hero</a></li>
+        <li><a href="#typography">Tipografia</a></li>
+        <li><a href="#colors">Cores</a></li>
+        <li><a href="#components">Componentes</a></li>
+        <li><a href="#layout">Layout</a></li>
+        <li><a href="#motion">Motion</a></li>
+        <li><a href="#icons">Ícones</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- =====================================================
+       0) HERO — clone do padrão Aura (glass-panel + pill avatars)
+                + arched image card do Green Museum
+       ===================================================== -->
+  <section id="hero" class="hero">
+    <div class="container xl">
+      <div class="hero-panel">
+        <div class="hero-pill">
+          <div class="avatars">
+            <span class="av">P</span>
+            <span class="av">B</span>
+            <span class="av">Q</span>
+          </div>
+          <span class="text"><strong>Design system v1</strong> · Templum · Brand Book 2025</span>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-content">
+            <h1 class="hero-headline">
+              Um sistema visual<br>
+              que <em>traduz</em> a oportunidade<br>
+              do novo MCMV em página.
+            </h1>
+            <p class="hero-subhead">
+              Tokens, tipografia Montserrat e componentes refinados — combinando a estrutura
+              dos modelos Aura e Green Museum com a identidade Templum.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#components" class="btn btn--primary btn--lg">
+                Ver componentes
+                <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+              </a>
+              <a href="#typography" class="btn btn--ghost btn--lg">Tipografia</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <div class="num"><em>+87,5</em>K</div>
+                <div class="lbl">Famílias</div>
+              </div>
+              <div class="hero-stat">
+                <div class="num">R$ <em>13</em>K</div>
+                <div class="lbl">Renda</div>
+              </div>
+              <div class="hero-stat">
+                <div class="num">R$ <em>600</em>K</div>
+                <div class="lbl">Imóveis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-imageCol">
+            <div class="hero-imageCard">
+              <img src="imagens/photo_01.png" alt="Construtora pronta para a oportunidade MCMV" />
+              <div class="hero-imageCaption">
+                <div>
+                  <div class="label">Quem está pronto</div>
+                  <div class="title">avança agora.</div>
+                </div>
+                <a href="#" class="btn btn--icon" aria-label="Saber mais">
+                  <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
+                </a>
+              </div>
+            </div>
+
+            <div class="hero-floating">
+              <div class="stat">+87,5K</div>
+              <div class="label">famílias com acesso a crédito mais barato</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       1) TYPOGRAPHY
+       ===================================================== -->
+  <section id="typography" class="ds-section">
+    <div class="container xl">
+      <span class="ds-eyebrow">01 — Tipografia</span>
+      <h2>Montserrat <em>refinada</em>.</h2>
+      <p class="ds-lede">
+        Família única <code>Montserrat</code>. Headlines em <strong>Medium 500</strong> com tracking negativo
+        (refinamento Aura). <strong>SemiBold 600</strong> para subtítulos. <strong>ExtraBold 800</strong>
+        reservado apenas para stat numbers. Body em Regular 400.
+      </p>
+
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Display 1</strong><code>.display-1</code></div>
+        <div class="ds-type-preview"><span class="display-1">O jogo mudou.</span></div>
+        <div class="ds-type-spec">96px / 0.94<br>500 · -0.04em</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Display 2</strong><code>.display-2</code></div>
+        <div class="ds-type-preview"><span class="display-2">Sua construtora está pronta?</span></div>
+        <div class="ds-type-spec">80px / 0.95<br>500 · -0.035em</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Heading 1</strong><code>.h1</code></div>
+        <div class="ds-type-preview"><h1 class="h1">A oportunidade silenciosa do novo MCMV</h1></div>
+        <div class="ds-type-spec">64px / 0.98<br>500 · -0.03em</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Heading 2</strong><code>.h2</code></div>
+        <div class="ds-type-preview"><h2 class="h2">A maioria não vai aproveitar</h2></div>
+        <div class="ds-type-spec">48px / 1.0<br>500 · -0.03em</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Heading 3</strong><code>.h3</code></div>
+        <div class="ds-type-preview"><h3 class="h3">Diagnóstico estratégico individual</h3></div>
+        <div class="ds-type-spec">32px / 1.1<br>600 · -0.022em</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Heading 4</strong><code>.h4</code></div>
+        <div class="ds-type-preview"><h4 class="h4">PBQP-H + GERIC alinhados</h4></div>
+        <div class="ds-type-spec">20px / 1.2<br>600 · -0.018em</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Bold L</strong><code>.bold-l</code></div>
+        <div class="ds-type-preview"><p class="bold-l">Acesso estruturado ao novo ciclo de mercado.</p></div>
+        <div class="ds-type-spec">18px · 600</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Bold M</strong><code>.bold-m</code></div>
+        <div class="ds-type-preview"><p class="bold-m">Sem PBQP-H, sem acesso.</p></div>
+        <div class="ds-type-spec">15px · 600</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Bold S</strong><code>.bold-s</code></div>
+        <div class="ds-type-preview"><p class="bold-s">SESSÃO ESTRATÉGICA</p></div>
+        <div class="ds-type-spec">13px · 600</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Paragraph</strong><code>.paragraph</code></div>
+        <div class="ds-type-preview"><p class="paragraph">Renda ampliada até R$ 13 mil e imóveis até R$ 600 mil aumentam o potencial de mercado — mas exigem estrutura.</p></div>
+        <div class="ds-type-spec">17px / 1.6 · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Regular L</strong><code>.reg-l</code></div>
+        <div class="ds-type-preview"><p class="reg-l">Diagnóstico, avaliação PBQP-H, direcionamento GERIC e plano de próximos passos.</p></div>
+        <div class="ds-type-spec">15px / 1.55 · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Regular M</strong><code>.reg-m</code></div>
+        <div class="ds-type-preview"><p class="reg-m">Sessão sem custo. Sem compromisso. Limitada por semana.</p></div>
+        <div class="ds-type-spec">13px / 1.5 · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Regular S</strong><code>.reg-s</code></div>
+        <div class="ds-type-preview"><p class="reg-s">Fonte: Governo Federal · MCMV · expansão 2025.</p></div>
+        <div class="ds-type-spec">12px / 1.5 · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-meta"><strong>Label Caps</strong><code>.label-caps</code></div>
+        <div class="ds-type-preview"><span class="label-caps">Atualização oficial</span></div>
+        <div class="ds-type-spec">11px · 600<br>0.14em</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       2) COLORS & SURFACES
+       ===================================================== -->
+  <section id="colors" class="ds-section">
+    <div class="container xl">
+      <span class="ds-eyebrow">02 — Cores</span>
+      <h2>Paleta <em>Templum</em>.</h2>
+      <p class="ds-lede">
+        Laranja <code>#FF5925</code> como ação. Cream <code>#FFF4DD</code> e bg warm como base.
+        Navy <code>#222831</code> como contraponto institucional. Marrom <code>#7F2611</code> dedicado a PBQP-H.
+      </p>
+
+      <h3 class="bold-l" style="margin: 24px 0 12px;">Brand · Orange</h3>
+      <div class="ds-swatch-grid">
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--orange-dark)"></div><div class="swatch-meta"><span class="swatch-name">Orange Dark</span><span class="swatch-hex">#AF4022</span><span class="swatch-role">Hover · pressed</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--orange)"></div><div class="swatch-meta"><span class="swatch-name">Orange</span><span class="swatch-hex">#FF5925</span><span class="swatch-role">PRIMARY · CTAs</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--peach)"></div><div class="swatch-meta"><span class="swatch-name">Peach</span><span class="swatch-hex">#FDA47D</span><span class="swatch-role">Image bg · soft</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--peach-light)"></div><div class="swatch-meta"><span class="swatch-name">Peach Light</span><span class="swatch-hex">#FDD88C</span><span class="swatch-role">Highlight</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--cream); border-bottom: 1px solid var(--border);"></div><div class="swatch-meta"><span class="swatch-name">Cream</span><span class="swatch-hex">#FFF4DD</span><span class="swatch-role">Page surface</span></div></div>
+      </div>
+
+      <h3 class="bold-l" style="margin: 32px 0 12px;">Yellow · Accents</h3>
+      <div class="ds-swatch-grid">
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--yellow)"></div><div class="swatch-meta"><span class="swatch-name">Yellow</span><span class="swatch-hex">#FDB73F</span><span class="swatch-role">Tag · spotlight</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--yellow-bright)"></div><div class="swatch-meta"><span class="swatch-name">Yellow Bright</span><span class="swatch-hex">#FFEE0D</span><span class="swatch-role">Pop accent</span></div></div>
+      </div>
+
+      <h3 class="bold-l" style="margin: 32px 0 12px;">Dark · Institucional</h3>
+      <div class="ds-swatch-grid">
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--black)"></div><div class="swatch-meta"><span class="swatch-name">Black</span><span class="swatch-hex">#000000</span><span class="swatch-role">Pure</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--navy)"></div><div class="swatch-meta"><span class="swatch-name">Navy</span><span class="swatch-hex">#222831</span><span class="swatch-role">Text · dark surface</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--brown-deep)"></div><div class="swatch-meta"><span class="swatch-name">Brown Deep</span><span class="swatch-hex">#4F251B</span><span class="swatch-role">Brown family</span></div></div>
+        <div class="ds-swatch"><div class="swatch-color" style="background: var(--brown-pbqp)"></div><div class="swatch-meta"><span class="swatch-name">PBQP-H</span><span class="swatch-hex">#7F2611</span><span class="swatch-role">Sub-brand</span></div></div>
+      </div>
+
+      <h3 class="bold-l" style="margin: 40px 0 12px;">Surfaces</h3>
+      <div class="ds-surface-grid">
+        <div class="ds-surface surface-bg"><span class="surface-label">PAGE</span><span class="surface-name">BG — #FFFAEB</span></div>
+        <div class="ds-surface surface-cream"><span class="surface-label">CREAM</span><span class="surface-name">#FFF4DD</span></div>
+        <div class="ds-surface surface-paper"><span class="surface-label">PANEL</span><span class="surface-name">#FFFFFF</span></div>
+        <div class="ds-surface surface-glass"><span class="surface-label">GLASS</span><span class="surface-name">white 92% + blur</span></div>
+        <div class="ds-surface surface-orange"><span class="surface-label">CTA</span><span class="surface-name">Orange — #FF5925</span></div>
+        <div class="ds-surface surface-navy"><span class="surface-label">DARK</span><span class="surface-name">Navy — #222831</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       3) UI COMPONENTS
+       ===================================================== -->
+  <section id="components" class="ds-section">
+    <div class="container xl">
+      <span class="ds-eyebrow">03 — Componentes</span>
+      <h2>UI <em>canônica</em>.</h2>
+      <p class="ds-lede">Botões, badges, status pill, stat cards, step cards, image cards, FAQ e blocos CTA.</p>
+
+      <div class="ds-component">
+        <h3>Buttons</h3>
+        <div class="ds-row"><span class="ds-label">Primary</span>
+          <a class="btn btn--primary btn--sm">Agendar <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a class="btn btn--primary">Agendar sessão <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a class="btn btn--primary btn--lg">Agendar sessão estratégica <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a class="btn btn--primary btn--xl">Quero meu diagnóstico <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a class="btn btn--primary btn--disabled">Disabled</a>
+        </div>
+        <div class="ds-row"><span class="ds-label">Dark</span>
+          <a class="btn btn--dark btn--sm">Saiba mais</a>
+          <a class="btn btn--dark">Saiba mais <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a class="btn btn--dark btn--lg">Falar com especialista</a>
+        </div>
+        <div class="ds-row"><span class="ds-label">Ghost</span>
+          <a class="btn btn--ghost btn--sm">Ver detalhes</a>
+          <a class="btn btn--ghost">Ver detalhes</a>
+          <a class="btn btn--ghost btn--lg">Ver detalhes</a>
+        </div>
+        <div class="ds-row"><span class="ds-label">Icon</span>
+          <a class="btn btn--icon" aria-label="seta"><iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+          <a class="btn btn--icon" aria-label="play"><iconify-icon icon="solar:play-bold"></iconify-icon></a>
+          <a class="btn btn--icon" aria-label="info"><iconify-icon icon="solar:info-circle-linear"></iconify-icon></a>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Badges &amp; status</h3>
+        <div class="ds-row"><span class="ds-label">Variants</span>
+          <span class="badge badge--default"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> Atualização oficial</span>
+          <span class="badge badge--orange"><iconify-icon icon="solar:fire-linear"></iconify-icon> Em alta</span>
+          <span class="badge badge--orange-solid">+87,5K famílias</span>
+          <span class="badge badge--cream">Cream</span>
+          <span class="badge badge--navy">GERIC · Caixa</span>
+          <span class="badge badge--yellow">Agenda limitada</span>
+          <span class="badge badge--peach">Quente</span>
+          <span class="badge badge--pbqp">PBQP-H</span>
+        </div>
+        <div class="ds-row"><span class="ds-label">Status pill</span>
+          <span class="status-pill"><span class="status-dot"></span> Sessões abertas esta semana</span>
+          <span class="status-pill"><span class="status-dot" style="background: var(--orange);"></span> Última semana de agenda</span>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Stat cards</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+          <div class="stat-card">
+            <span class="label-caps">Famílias</span>
+            <div class="num"><em>+87,5</em>K</div>
+            <div class="lbl">com acesso a crédito mais barato.</div>
+          </div>
+          <div class="stat-card --orange">
+            <span class="label-caps">Renda</span>
+            <div class="num">R$ <em>13</em>K</div>
+            <div class="lbl">limite ampliado de financiamento.</div>
+          </div>
+          <div class="stat-card --navy">
+            <span class="label-caps">Imóveis</span>
+            <div class="num">R$ <em>600</em>K</div>
+            <div class="lbl">teto novo para o MCMV.</div>
+          </div>
+          <div class="stat-card">
+            <span class="label-caps">Mercado</span>
+            <div class="num">+<em>2,5</em>x</div>
+            <div class="lbl">capacidade real de financiamento.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Step cards</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-title">Diagnóstico</div>
+            <div class="step-text">Avaliação da situação atual da construtora frente ao novo MCMV.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-title">PBQP-H</div>
+            <div class="step-text">O que falta para destravar a certificação que sustenta a aprovação.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-title">GERIC</div>
+            <div class="step-text">Como acelerar a aprovação na Caixa e reduzir entraves de processo.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <div class="step-title">Plano</div>
+            <div class="step-text">Próximos passos com prazos e priorização de gargalos.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Checklist</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+          <ul class="check-list">
+            <li class="check-item">
+              <span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>
+              <span><strong>PBQP-H</strong> consolidado</span>
+            </li>
+            <li class="check-item">
+              <span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>
+              <span>Aprovação na Caixa <strong>fluindo</strong></span>
+            </li>
+            <li class="check-item">
+              <span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>
+              <span>Capacidade de financiamento <strong>ampliada</strong></span>
+            </li>
+          </ul>
+          <ul class="check-list">
+            <li class="check-item">
+              <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
+              <span><strong>Sem PBQP-H</strong></span>
+            </li>
+            <li class="check-item">
+              <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
+              <span>Projetos <strong>travados</strong> na Caixa</span>
+            </li>
+            <li class="check-item">
+              <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
+              <span><strong>Falta de organização</strong> para aprovação</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Image cards · arched (Green Museum)</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+          <div class="image-card">
+            <span class="badge badge--cream floating-badge">+87,5K famílias</span>
+            <img src="imagens/photo_01.png" alt="Construtor pronto" />
+            <div class="caption">
+              <span class="label">Quem está pronto</span>
+              <span class="title">avança agora.</span>
+            </div>
+          </div>
+          <div class="image-card" style="background: var(--navy);">
+            <span class="badge badge--orange-solid floating-badge">3 sinais críticos</span>
+            <div class="caption">
+              <span class="label">Quem não está</span>
+              <span class="title">fica vendo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>FAQ</h3>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              A sessão estratégica tem custo?
+              <iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon>
+            </summary>
+            <div class="faq-answer">Não. É gratuita e individual. O objetivo é avaliar a situação real da sua construtora frente ao novo MCMV.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">
+              Em quanto tempo recebo retorno?
+              <iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon>
+            </summary>
+            <div class="faq-answer">Após a sessão, enviamos uma proposta personalizada em até 48 horas com o caminho mais rápido.</div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">
+              Quem conduz a sessão?
+              <iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon>
+            </summary>
+            <div class="faq-answer">Especialistas Templum em PBQP-H e GERIC com prática real em aprovação na Caixa.</div>
+          </details>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>CTA dark</h3>
+        <div class="cta-dark">
+          <span class="badge badge--orange-solid">Sessão estratégica</span>
+          <h3 style="margin-top: 16px;">A trava não é o mercado.<br>É a sua <em>estrutura</em>.</h3>
+          <p>Sem PBQP-H e sem alinhamento com a Caixa, a oportunidade simplesmente não chega.</p>
+          <ul class="check-list" style="max-width: 540px; margin-bottom: 24px;">
+            <li class="check-item"><span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span><span>Sem custo · sem compromisso</span></li>
+            <li class="check-item"><span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span><span>Conduzida por especialistas</span></li>
+          </ul>
+          <a class="btn btn--primary btn--lg">Quero meu diagnóstico <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Marquee</h3>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span>renda até R$ 13 mil</span><span class="dot"></span>
+            <span class="--orange">imóveis até R$ 600 mil</span><span class="dot"></span>
+            <span>+87,5 mil famílias</span><span class="dot"></span>
+            <span class="--orange">PBQP-H</span><span class="dot"></span>
+            <span>GERIC · Caixa</span><span class="dot"></span>
+            <span>renda até R$ 13 mil</span><span class="dot"></span>
+            <span class="--orange">imóveis até R$ 600 mil</span><span class="dot"></span>
+            <span>+87,5 mil famílias</span><span class="dot"></span>
+            <span class="--orange">PBQP-H</span><span class="dot"></span>
+            <span>GERIC · Caixa</span><span class="dot"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       4) LAYOUT & SPACING
+       ===================================================== -->
+  <section id="layout" class="ds-section">
+    <div class="container xl">
+      <span class="ds-eyebrow">04 — Layout</span>
+      <h2>Ritmo &amp; <em>respiração</em>.</h2>
+      <p class="ds-lede">Container 1300px (Aura) · grid 12 colunas · seções com 96px de padding · gaps em múltiplos de 8.</p>
+
+      <div class="ds-component">
+        <h3>Containers</h3>
+        <div class="ds-container-demo">.container.xl — max-width: 1300px (Aura)</div>
+        <div class="ds-container-demo" style="max-width: 1180px;">.container.lg — max-width: 1180px</div>
+        <div class="ds-container-demo" style="max-width: 1024px;">.container.md — max-width: 1024px</div>
+        <div class="ds-container-demo" style="max-width: 760px;">.container.sm — max-width: 760px</div>
+      </div>
+
+      <div class="ds-component">
+        <h3>12-col grid</h3>
+        <div class="ds-grid-demo">
+          <div></div><div></div><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+
+      <div class="ds-component">
+        <h3>Spacing scale (8pt)</h3>
+        <div class="ds-spacing-bar">
+          <div><div class="ds-spacing-tick" style="width: 8px;  height: 8px;"></div><div class="ds-spacing-label">8</div></div>
+          <div><div class="ds-spacing-tick" style="width: 16px; height: 16px;"></div><div class="ds-spacing-label">16</div></div>
+          <div><div class="ds-spacing-tick" style="width: 24px; height: 24px;"></div><div class="ds-spacing-label">24</div></div>
+          <div><div class="ds-spacing-tick" style="width: 32px; height: 32px;"></div><div class="ds-spacing-label">32</div></div>
+          <div><div class="ds-spacing-tick" style="width: 48px; height: 48px;"></div><div class="ds-spacing-label">48</div></div>
+          <div><div class="ds-spacing-tick" style="width: 64px; height: 64px;"></div><div class="ds-spacing-label">64</div></div>
+          <div><div class="ds-spacing-tick" style="width: 96px; height: 96px;"></div><div class="ds-spacing-label">96</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       5) MOTION & INTERACTION
+       ===================================================== -->
+  <section id="motion" class="ds-section">
+    <div class="container xl">
+      <span class="ds-eyebrow">05 — Motion</span>
+      <h2>Comportamentos <em>sutis</em>.</h2>
+      <p class="ds-lede">Easings cubic-bezier suaves, durações 300–600ms. Sem entradas espalhafatosas — interação que reforça leitura.</p>
+
+      <div class="ds-motion-grid">
+        <div class="ds-motion-card">
+          <span class="label">Spin · selo</span>
+          <div class="demo-spin"></div>
+          <span class="meta">animation: spin 16s linear infinite</span>
+        </div>
+        <div class="ds-motion-card">
+          <span class="label">Pulse · status</span>
+          <div class="demo-pulse">
+            <span class="pulse-dot"></span>
+            <span class="bold-m" style="color: var(--text);">Sessões abertas</span>
+          </div>
+          <span class="meta">@keyframes pulse · 1.8s</span>
+        </div>
+        <div class="ds-motion-card">
+          <span class="label">Lift · hover</span>
+          <a class="demo-lift">Passar o mouse</a>
+          <span class="meta">translateY(-2px) · 350ms</span>
+        </div>
+        <div class="ds-motion-card">
+          <span class="label">Arrow slide</span>
+          <a class="demo-arrow">Saiba mais <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <span class="meta">translateX(6px) · 550ms</span>
+        </div>
+        <div class="ds-motion-card">
+          <span class="label">Image · scale + saturate</span>
+          <div class="demo-imgWrap">
+            <div class="demo-img" style="background-image: url('imagens/photo_01.png');"></div>
+          </div>
+          <span class="meta">scale 1.06 + saturate · 1.4s</span>
+        </div>
+        <div class="ds-motion-card">
+          <span class="label">Vertical scroll (Aura)</span>
+          <div class="demo-vScroll">
+            <div class="track">
+              <div>"Aprovamos 3x mais rápido"</div>
+              <div>"Saímos do limbo do GERIC"</div>
+              <div>"Agora a Caixa libera"</div>
+              <div>"Aprovamos 3x mais rápido"</div>
+            </div>
+          </div>
+          <span class="meta">@keyframes vscroll · 12s</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       6) ICONS
+       ===================================================== -->
+  <section id="icons" class="ds-section">
+    <div class="container xl">
+      <span class="ds-eyebrow">06 — Ícones</span>
+      <h2>Solar <em>linear</em>.</h2>
+      <p class="ds-lede">
+        Iconify · Solar icon set. Linear como padrão. Bold-duotone para destaques pontuais.
+        Tamanhos 16/18/20/24/26.
+      </p>
+
+      <div class="ds-icon-grid">
+        <div class="ds-icon-tile"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon><span class="ds-icon-name">arrow-right</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon><span class="ds-icon-name">arrow-right-up</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:check-read-linear"></iconify-icon><span class="ds-icon-name">check-read</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:close-circle-linear"></iconify-icon><span class="ds-icon-name">close-circle</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:shield-check-linear"></iconify-icon><span class="ds-icon-name">shield-check</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:bolt-circle-bold-duotone"></iconify-icon><span class="ds-icon-name">bolt-circle</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:fire-linear"></iconify-icon><span class="ds-icon-name">fire</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:calendar-linear"></iconify-icon><span class="ds-icon-name">calendar</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:buildings-linear"></iconify-icon><span class="ds-icon-name">buildings</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:chart-2-linear"></iconify-icon><span class="ds-icon-name">chart</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon><span class="ds-icon-name">users</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:dollar-minimalistic-linear"></iconify-icon><span class="ds-icon-name">dollar</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:lock-keyhole-minimalistic-linear"></iconify-icon><span class="ds-icon-name">lock</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:target-linear"></iconify-icon><span class="ds-icon-name">target</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:document-text-linear"></iconify-icon><span class="ds-icon-name">document</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon><span class="ds-icon-name">arrow-down</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:play-bold"></iconify-icon><span class="ds-icon-name">play</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:info-circle-linear"></iconify-icon><span class="ds-icon-name">info</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:rocket-linear"></iconify-icon><span class="ds-icon-name">rocket</span></div>
+        <div class="ds-icon-tile"><iconify-icon icon="solar:medal-star-linear"></iconify-icon><span class="ds-icon-name">medal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 64px 0; text-align: center; border-top: 1px solid var(--border);">
+    <div class="container xl">
+      <div class="templum-logo" style="margin-bottom: 12px;">Templum<span class="bang">!</span></div>
+      <p class="reg-s">Design System v1 · Ação PBQP-H · Campanha MCMV + GERIC · 2025</p>
+    </div>
+  </footer>
+
+</body>
+</html>
