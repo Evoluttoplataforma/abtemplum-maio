@@ -8,6 +8,18 @@
   <title>PBQP-H com Garantia em Contrato · Templum</title>
   <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
 
+  <!-- Performance: preconnect e preload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://code.iconify.design" crossorigin>
+  <link rel="preconnect" href="https://api.iconify.design" crossorigin>
+  <link rel="preconnect" href="https://player.vimeo.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preload" as="image" href="../assets/images/photo_02.avif" type="image/avif" fetchpriority="high">
+
+  <!-- Fonte (não-bloqueante; antes era @import dentro do CSS) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -21,8 +33,8 @@
   })(window,document,'script','dataLayer','GTM-WC3P2SNP');</script>
   <!-- End Google Tag Manager -->
 
-  <!-- Iconify -->
-  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <!-- Iconify (defer: não bloqueia parser) -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js" defer></script>
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -36,7 +48,7 @@
   <nav class="ds-nav --variant-b">
     <div class="ds-nav-inner">
       <a href="#hero" class="templum-logo" data-track="nav_logo">
-        <img src="../assets/brand/logo-templum.png" alt="Templum Consultoria">
+        <img src="../assets/brand/logo-templum.png" alt="Templum Consultoria" width="120" height="26" decoding="async">
       </a>
       <ul class="ds-nav-menu">
         <li><a href="#numeros" data-track="nav_link">Números</a></li>
@@ -92,7 +104,11 @@
 
         <div class="hero-imageCol">
           <div class="hero-imageCard">
-            <img src="../assets/images/photo_02.png" alt="Construtora certificada PBQP-H">
+            <picture>
+              <source srcset="../assets/images/photo_02.avif" type="image/avif">
+              <source srcset="../assets/images/photo_02.jpg" type="image/jpeg">
+              <img src="../assets/images/photo_02.jpg" alt="Construtora certificada PBQP-H" width="1400" height="1400" fetchpriority="high" decoding="async">
+            </picture>
             <div class="hero-imageCaption">
               <div>
                 <div class="label">A consultoria nº 1</div>
@@ -314,7 +330,7 @@
         </div>
 
         <div class="selo-badge-image">
-          <img src="../assets/brand/selo-reconhecimento.avif" alt="Selo de Reconhecimento Templum">
+          <img src="../assets/brand/selo-reconhecimento.avif" alt="Selo de Reconhecimento Templum" width="320" height="320" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -436,7 +452,7 @@
       <div class="split-grid mt-8">
         <div class="testi-card">
           <div class="testi-video">
-            <iframe src="https://player.vimeo.com/video/103908164?badge=0&autopause=0&player_id=0" allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" title="Case Carvalho Forte"></iframe>
+            <iframe src="https://player.vimeo.com/video/103908164?badge=0&autopause=0&player_id=0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Case Carvalho Forte"></iframe>
           </div>
         </div>
         <div>
@@ -605,16 +621,16 @@
   <footer>
     <div class="container xl">
       <div class="footer-brand" style="margin-bottom: 32px;">
-        <img src="../assets/brand/logo-templum-light.png" alt="Templum Consultoria">
+        <img src="../assets/brand/logo-templum-light.png" alt="Templum Consultoria" width="120" height="22" loading="lazy" decoding="async">
         <p>Templum. A consultoria de certificação com mais experiência no Brasil. 30 anos certificando empresas com garantia em contrato.</p>
       </div>
       <div class="footer-bottom">© 2025 Templum Consultoria. Todos os direitos reservados.</div>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="../shared/js/analytics.js"></script>
-  <script src="../shared/js/form.js"></script>
-  <script src="script.js"></script>
+  <!-- Scripts (defer não-bloqueante) -->
+  <script src="../shared/js/analytics.js" defer></script>
+  <script src="../shared/js/form.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

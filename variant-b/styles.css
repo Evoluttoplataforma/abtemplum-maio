@@ -1,7 +1,5 @@
-/* Variante A — DS2 (Aura + Green-Museum) — clone fiel
-   Tokens DS2 inline aqui (sem depender do shared) pra evitar conflito de classes. */
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+/* Variante B — DS2 (Aura + Green-Museum) — clone fiel
+   Tokens DS2 inline. Font Montserrat carregada via <link> no HTML (não-bloqueante). */
 
 :root {
   /* Brand · Orange */

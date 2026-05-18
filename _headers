@@ -1,0 +1,22 @@
+# Cloudflare Pages — cache + security headers
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()
+
+# Imagens, fontes e brand: 1 ano, immutable (não mudam)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS e JS: 1 dia (pra iteração rápida)
+/*.css
+  Cache-Control: public, max-age=86400, must-revalidate
+/*.js
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# HTML: cache curto pra atualizar rápido
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+/
+  Cache-Control: public, max-age=300, must-revalidate
