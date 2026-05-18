@@ -45,9 +45,9 @@
     });
   });
 
-  // 4. Config inicial — webhook configurável
+  // 4. Config inicial — webhook Make.com
   if (window.__pbqph?.config) {
-    window.__pbqph.config.webhookUrl = null; // substituir quando tiver
+    window.__pbqph.config.webhookUrl = "https://hook.us1.make.com/g29csjuy9bduidsymp2yeco9oa98u7mh";
     window.__pbqph.config.debug = false;
   }
 })();

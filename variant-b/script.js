@@ -41,9 +41,9 @@
     });
   });
 
-  // 3. Config webhook (configurar antes de publicar)
+  // 3. Config webhook Make.com
   if (window.__pbqph?.config) {
-    window.__pbqph.config.webhookUrl = null;
+    window.__pbqph.config.webhookUrl = "https://hook.us1.make.com/g29csjuy9bduidsymp2yeco9oa98u7mh";
     window.__pbqph.config.debug = false;
   }
 })();
