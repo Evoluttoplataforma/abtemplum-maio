@@ -14,10 +14,11 @@
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://code.iconify.design">
   <link rel="dns-prefetch" href="https://player.vimeo.com">
-  <link rel="preload" as="image" href="../assets/images/photo_02.avif" type="image/avif" fetchpriority="high">
+  <link rel="preload" as="image" href="../assets/images/photo_02-800.avif" imagesrcset="../assets/images/photo_02-800.avif 800w, ../assets/images/photo_02.avif 1400w" imagesizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px" type="image/avif" fetchpriority="high">
 
-  <!-- Fonte -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+  <!-- Fonte async (não-bloqueante) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"></noscript>
 
   <!-- Google Tag Manager (lazy via requestIdleCallback) -->
   <script>
@@ -80,9 +81,9 @@
   /* Text */
   --text:      #18191B;
   --text-2:    #3F424B;
-  --text-mid:  rgba(24,25,27,0.62);
-  --text-soft: rgba(24,25,27,0.42);
-  --text-faint:rgba(24,25,27,0.18);
+  --text-mid:  rgba(24,25,27,0.72);
+  --text-soft: rgba(24,25,27,0.60);
+  --text-faint:rgba(24,25,27,0.32);
 
   /* Borders */
   --border:        rgba(24,25,27,0.08);
@@ -95,7 +96,7 @@
   --danger:  #DC2626;
 
   /* Type */
-  --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Montserrat", "Montserrat Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* Radii */
   --r-12: 12px; --r-16: 16px; --r-20: 20px; --r-24: 24px; --r-32: 32px; --r-40: 40px;
@@ -112,6 +113,19 @@
   --ease-soft: cubic-bezier(.22, 1, .36, 1);
   --ease-snap: cubic-bezier(.4, 0, .2, 1);
 }
+
+/* Fallback que evita CLS enquanto Montserrat carrega */
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-display: swap;
+  ascent-override: 91.66%;
+  descent-override: 23.81%;
+  line-gap-override: 0%;
+  size-adjust: 104.31%;
+}
+
+iconify-icon { display: inline-flex; width: 1em; height: 1em; }
 
 /* ============ RESET & BASE ============ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1210,13 +1224,15 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
         <li><a href="#faq" data-track="nav_link">FAQ</a></li>
       </ul>
       <div class="ds-nav-right">
-        <a href="#lead-form" class="btn btn--arrowbox btn--sm" data-track="cta_nav">
-          <span class="btn-arrowBox"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
+        <a href="#lead-form" class="btn btn--arrowbox btn--sm" data-track="cta_nav" aria-label="Certificar minha construtora">
+          <span class="btn-arrowBox" aria-hidden="true"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
           <span class="btn-textBox"><span class="btn-textBox-label">Certificar minha construtora</span></span>
         </a>
       </div>
     </div>
   </nav>
+
+  <main id="conteudo">
 
   <!-- ============ 1. HERO ============ -->
   <section id="hero" class="hero">
@@ -1245,8 +1261,8 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
 
           <div class="hero-bottomBlock">
             <div class="hero-actions">
-              <a href="#lead-form" class="btn btn--arrowbox" data-track="cta_hero_primary">
-                <span class="btn-arrowBox"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
+              <a href="#lead-form" class="btn btn--arrowbox" data-track="cta_hero_primary" aria-label="Quero certificar minha construtora">
+                <span class="btn-arrowBox" aria-hidden="true"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
                 <span class="btn-textBox">Quero certificar minha construtora</span>
               </a>
             </div>
@@ -1257,8 +1273,8 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
         <div class="hero-imageCol">
           <div class="hero-imageCard">
             <picture>
-              <source srcset="../assets/images/photo_02.avif" type="image/avif">
-              <source srcset="../assets/images/photo_02.jpg" type="image/jpeg">
+              <source type="image/avif" srcset="../assets/images/photo_02-800.avif 800w, ../assets/images/photo_02.avif 1400w" sizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px">
+              <source type="image/webp" srcset="../assets/images/photo_02-800.webp 800w, ../assets/images/photo_02.webp 1400w" sizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px">
               <img src="../assets/images/photo_02.jpg" alt="Construtora certificada PBQP-H" width="1400" height="1400" fetchpriority="high" decoding="async">
             </picture>
             <div class="hero-imageCaption">
@@ -1642,8 +1658,8 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
         </div>
       </div>
 
-      <a href="#lead-form" class="btn btn--arrowbox" data-track="cta_cobertura">
-        <span class="btn-arrowBox"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
+      <a href="#lead-form" class="btn btn--arrowbox" data-track="cta_cobertura" aria-label="Verificar se atendemos minha cidade">
+        <span class="btn-arrowBox" aria-hidden="true"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
         <span class="btn-textBox">Verificar se atendemos minha cidade</span>
       </a>
     </div>
@@ -1768,6 +1784,8 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer>

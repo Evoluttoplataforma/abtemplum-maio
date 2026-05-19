@@ -31,9 +31,9 @@
   /* Text */
   --text:      #18191B;
   --text-2:    #3F424B;
-  --text-mid:  rgba(24,25,27,0.62);
-  --text-soft: rgba(24,25,27,0.42);
-  --text-faint:rgba(24,25,27,0.18);
+  --text-mid:  rgba(24,25,27,0.72);
+  --text-soft: rgba(24,25,27,0.60);
+  --text-faint:rgba(24,25,27,0.32);
 
   /* Borders */
   --border:        rgba(24,25,27,0.08);
@@ -46,7 +46,22 @@
   --danger:  #DC2626;
 
   /* Type */
-  --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Montserrat", "Montserrat Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Fallback font com métricas casadas com Montserrat — zera CLS no font swap */
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-display: swap;
+  ascent-override: 91.66%;
+  descent-override: 23.81%;
+  line-gap-override: 0%;
+  size-adjust: 104.31%;
+}
+
+:root {
+  --__unused: 0;
 
   /* Radii */
   --r-12: 12px; --r-16: 16px; --r-20: 20px; --r-24: 24px; --r-32: 32px; --r-40: 40px;
