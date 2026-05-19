@@ -137,14 +137,20 @@
     }
     .live-modal h2 em { color: var(--orange); font-style: normal; }
     .live-modal p { font-size: 14px; color: var(--text-mid); line-height: 1.5; margin-bottom: 20px; }
-    .live-prefill {
+    .speaker {
+      display: flex; align-items: center; gap: 14px;
       background: var(--cream-2); border: 1px solid var(--border); border-radius: 14px;
-      padding: 14px 16px; margin-bottom: 20px; text-align: left; font-size: 13px;
+      padding: 14px 16px; margin-bottom: 22px; text-align: left;
     }
-    .live-prefill-row { display: flex; justify-content: space-between; padding: 4px 0; }
-    .live-prefill-row + .live-prefill-row { border-top: 1px dashed var(--border); }
-    .live-prefill-row span:first-child { color: var(--text-soft); font-weight: 500; }
-    .live-prefill-row span:last-child { color: var(--text); font-weight: 600; text-align: right; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .speaker-avatar {
+      width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--peach-light));
+      color: #fff; font-weight: 800; font-size: 16px; letter-spacing: 0.04em;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .speaker-info { display: flex; flex-direction: column; line-height: 1.3; }
+    .speaker-info strong { font-size: 15px; font-weight: 700; color: var(--text); }
+    .speaker-info span { font-size: 12px; color: var(--text-mid); font-weight: 500; }
     .live-actions { display: flex; flex-direction: column; gap: 10px; }
     .live-btn {
       width: 100%; height: 52px; border: none; border-radius: 14px;
@@ -218,20 +224,21 @@
       <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
     </button>
     <div class="live-modal-inner">
-      <span class="live-tag"><span class="live-dot" aria-hidden="true"></span> Live · vagas limitadas</span>
-      <h2 id="live-title">Quer ver na prática como a gente <em>certifica em <span id="live-norm-label">PBQP-H</span></em>?</h2>
-      <p>Participe da próxima live de demonstração do <strong>Orbit</strong>, a plataforma que usamos pra acompanhar cada construtora do diagnóstico ao certificado. Sem compromisso, com Q&amp;A ao vivo.</p>
+      <span class="live-tag"><span class="live-dot" aria-hidden="true"></span> Live · gratuita</span>
+      <h2 id="live-title">A Nova Era da Gestão com <em>Time de IA</em></h2>
+      <p>Como resolver problemas de gestão e processos com IA. Uma conversa prática sobre o que já é possível fazer hoje e como aplicar na sua empresa.</p>
 
-      <div class="live-prefill" id="live-prefill" hidden>
-        <div class="live-prefill-row"><span>Nome</span><span id="live-prefill-name">—</span></div>
-        <div class="live-prefill-row"><span>E-mail</span><span id="live-prefill-email">—</span></div>
-        <div class="live-prefill-row"><span>WhatsApp</span><span id="live-prefill-whatsapp">—</span></div>
-        <div class="live-prefill-row"><span>Empresa</span><span id="live-prefill-empresa">—</span></div>
+      <div class="speaker">
+        <div class="speaker-avatar" aria-hidden="true">IF</div>
+        <div class="speaker-info">
+          <strong>Igor Furniel</strong>
+          <span>CEO Templum &amp; Evolutto</span>
+        </div>
       </div>
 
       <div class="live-actions">
         <button type="button" class="live-btn live-btn--primary" id="live-confirm">
-          Quero participar da live
+          Quero participar, escolher data
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
         <button type="button" class="live-btn live-btn--ghost" id="live-skip">Agora não</button>
@@ -244,7 +251,7 @@
   <script>
   (function () {
     const STORAGE_KEY = "__pbqph_lastlead";
-    const NORM_FALLBACK = { slug: "pbqp-h", label: "PBQP-H" };
+    const LIVE_URL = "https://orbitgestao.com.br/live";
 
     function readLead() {
       try {
@@ -253,64 +260,41 @@
       } catch (e) { return null; }
     }
 
-    function fillPrefill(lead) {
-      if (!lead) return;
-      const box = document.getElementById("live-prefill");
-      const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
-      set("live-prefill-name", lead.name);
-      set("live-prefill-email", lead.email);
-      set("live-prefill-whatsapp", lead.whatsapp);
-      set("live-prefill-empresa", lead.empresa);
-      if (lead.name || lead.email) box.hidden = false;
-    }
+    function buildLiveUrl(lead) {
+      const params = new URLSearchParams();
+      const add = (k, v) => { if (v) params.set(k, v); };
 
-    function setNormLabel(lead) {
-      const label = (lead && lead.norm_label) || NORM_FALLBACK.label;
-      const el = document.getElementById("live-norm-label");
-      if (el) el.textContent = label;
-    }
+      if (lead) {
+        // Nomes padrão CRM (HubSpot, RD)
+        add("firstname", lead.firstname);
+        add("lastname", lead.lastname);
+        add("name", lead.name);
+        add("email", lead.email);
+        // WhatsApp em múltiplos nomes que formulários comuns aceitam
+        add("whatsapp", lead.whatsapp);
+        add("phone", lead.whatsapp);
+        add("telefone", lead.whatsapp);
+        add("empresa", lead.empresa);
+        add("company", lead.empresa);
+        add("funcionarios", lead.funcionarios);
+        add("faturamento", lead.faturamento);
+        add("norm", lead.norm_slug);
+        add("variant", lead.variant);
+      }
 
-    async function submitLiveSignup(lead) {
-      const cfg = (window.__pbqph && window.__pbqph.config) || {};
-      const url = cfg.liveWebhook || cfg.liveSupabaseUrl;
-      const payload = Object.assign({}, lead, {
-        live_signup: true,
-        live_signup_ts: Date.now(),
-        norm_slug: (lead && lead.norm_slug) || NORM_FALLBACK.slug,
-        norm_label: (lead && lead.norm_label) || NORM_FALLBACK.label,
-        source: "thank_you_modal",
-        page: location.href,
-        referrer: document.referrer || ""
+      // Atribuição: marca de onde o lead da live veio
+      add("utm_source", "templum-lp");
+      add("utm_medium", "thank-you-modal");
+      add("utm_campaign", (lead && lead.norm_slug) || "templum");
+
+      // Preserva utms originais que vieram pra landing (se existirem na URL atual)
+      const currentParams = new URLSearchParams(location.search);
+      currentParams.forEach((v, k) => {
+        if (k.startsWith("utm_") && !params.has(k)) params.set(k, v);
+        else if (["fbclid","gclid","gbraid","wbraid","ttclid","msclkid","li_fat_id"].includes(k)) params.set(k, v);
       });
 
-      // dataLayer event pro GTM
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "live_signup", norm: payload.norm_slug });
-
-      if (!url) {
-        console.warn("[live] sem endpoint configurado — payload:", payload);
-        return { ok: true, simulated: true };
-      }
-
-      try {
-        const headers = { "Content-Type": "application/json" };
-        if (cfg.liveSupabaseKey) {
-          headers["apikey"] = cfg.liveSupabaseKey;
-          headers["Authorization"] = "Bearer " + cfg.liveSupabaseKey;
-          headers["Prefer"] = "return=minimal";
-        }
-        const res = await fetch(url, {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(payload),
-          keepalive: true
-        });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return { ok: true };
-      } catch (err) {
-        console.error("[live] erro ao enviar:", err);
-        return { ok: false, error: String(err) };
-      }
+      return LIVE_URL + "?" + params.toString();
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -320,9 +304,6 @@
       const skipBtn = document.getElementById("live-skip");
       const closeBtn = document.getElementById("live-close");
       const status = document.getElementById("live-status");
-
-      setNormLabel(lead);
-      fillPrefill(lead);
 
       function openModal() {
         if (!modal || modal.open) return;
@@ -337,35 +318,23 @@
         else modal.removeAttribute("open");
       }
 
-      // abre depois de 1.2s pro usuário processar o "Recebemos seu contato"
       setTimeout(openModal, 1200);
 
-      confirmBtn.addEventListener("click", async function () {
+      confirmBtn.addEventListener("click", function () {
         confirmBtn.disabled = true;
         status.className = "live-status";
-        status.textContent = "Confirmando...";
-        const result = await submitLiveSignup(lead || {});
-        if (result.ok) {
-          status.className = "live-status is-success";
-          status.textContent = result.simulated
-            ? "Confirmado! (modo demo — endpoint da live não configurado)"
-            : "Pronto! Você vai receber o link da live no WhatsApp e e-mail.";
-          confirmBtn.style.display = "none";
-          skipBtn.textContent = "Fechar";
-        } else {
-          status.className = "live-status is-error";
-          status.textContent = "Não conseguimos confirmar agora. Tente em alguns segundos.";
-          confirmBtn.disabled = false;
-        }
+        status.textContent = "Levando você pra escolher a data...";
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "live_signup_click",
+          norm: (lead && lead.norm_slug) || ""
+        });
+        window.location.href = buildLiveUrl(lead);
       });
 
       skipBtn.addEventListener("click", closeModal);
       closeBtn.addEventListener("click", closeModal);
     });
-
-    // Bootstrap config (será sobrescrito pelo script de config global se houver)
-    window.__pbqph = window.__pbqph || {};
-    window.__pbqph.config = window.__pbqph.config || {};
   })();
   </script>
 </body>
