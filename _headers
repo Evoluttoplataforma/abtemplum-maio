@@ -9,11 +9,11 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# CSS e JS: 1 dia (pra iteração rápida)
+# CSS e JS: 5 min enquanto está em iteração ativa (depois subir pra 1d)
 /*.css
-  Cache-Control: public, max-age=86400, must-revalidate
+  Cache-Control: public, max-age=300, must-revalidate
 /*.js
-  Cache-Control: public, max-age=86400, must-revalidate
+  Cache-Control: public, max-age=300, must-revalidate
 
 # HTML: cache curto pra atualizar rápido
 /*.html
