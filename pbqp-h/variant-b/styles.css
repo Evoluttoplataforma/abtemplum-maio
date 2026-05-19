@@ -1252,3 +1252,6 @@ img, picture, video, svg { max-width: 100%; }
   .nav-hamburger { display: inline-flex; }
   body.no-scroll { overflow: hidden; }
 }
+
+/* Esconde floating card no mobile (sobreposição com caption da hero image) */
+@media (max-width: 600px) { .hero-floatingCard { display: none !important; } }
