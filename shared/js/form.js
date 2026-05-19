@@ -140,10 +140,34 @@
         status.textContent = result.simulated
           ? "Recebido! (modo demo — sem webhook configurado)"
           : "Redirecionando...";
+
+        // Detecta a norma a partir do path (pbqp-h, iso-9001, iso-27001...)
+        const pathSeg = (location.pathname.split("/")[1] || "").toLowerCase();
+        const NORM_MAP = { "pbqp-h": "PBQP-H", "iso-9001": "ISO 9001", "iso-27001": "ISO 27001" };
+        const normSlug = NORM_MAP[pathSeg] ? pathSeg : "";
+        const normLabel = NORM_MAP[pathSeg] || "";
+
+        // Salva os dados pro funil da live na página de obrigado
+        try {
+          sessionStorage.setItem("__pbqph_lastlead", JSON.stringify({
+            name: data.name || "",
+            firstname: (data.name || "").trim().split(/\s+/)[0] || "",
+            lastname: (data.name || "").trim().split(/\s+/).slice(1).join(" ") || "",
+            email: data.email || "",
+            whatsapp: data.whatsapp || "",
+            empresa: data.empresa || "",
+            funcionarios: data.funcionarios || "",
+            faturamento: data.faturamento || "",
+            norm_slug: normSlug,
+            norm_label: normLabel,
+            variant: document.body.dataset.variant || "",
+            ts: Date.now()
+          }));
+        } catch (e) { /* sessionStorage cheio/bloqueado: ignora */ }
+
         form.reset();
         opts.onSuccess?.(data);
         // Redireciona pra página de obrigado preservando query string (UTMs/click IDs)
-        // Pula em modo demo (sem webhook) pra facilitar inspeção local
         if (!result.simulated) {
           const thanksUrl = "/obrigado/" + (window.location.search || "");
           setTimeout(function () { window.location.href = thanksUrl; }, 350);
