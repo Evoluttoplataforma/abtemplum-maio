@@ -981,6 +981,38 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
   .container { padding-left: 14px; padding-right: 14px; }
 }
 
+img, picture, video, svg { max-width: 100%; }
+@media (max-width: 600px) {
+  .grid-5 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .step-card { padding: 18px 18px; }
+  .btn { white-space: normal; text-align: center; max-width: 100%; }
+  .btn--xl, .btn--lg { width: 100%; font-size: 15px; padding: 16px 22px; }
+  .btn--arrowbox { display: flex; width: 100%; max-width: 100%; }
+  .btn--arrowbox .btn-textBox { flex: 1; min-width: 0; padding: 0 16px; }
+  .btn--arrowbox .btn-arrowBox { flex-shrink: 0; }
+  .hero h1, .hero-headline { word-break: break-word; overflow-wrap: anywhere; hyphens: auto; }
+}
+@media (max-width: 420px) { .grid-5 { grid-template-columns: 1fr; } }
+.nav-hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border-2); border-radius: 12px; cursor: pointer; color: var(--text); padding: 0; }
+.nav-hamburger svg { width: 22px; height: 22px; }
+.nav-drawer { position: fixed; inset: 0; z-index: 100; display: none; flex-direction: column; background: var(--cream-2); padding: 24px; }
+.nav-drawer.is-open { display: flex; }
+.nav-drawer-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+.nav-drawer-close { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border-2); border-radius: 12px; cursor: pointer; color: var(--text); padding: 0; }
+.nav-drawer-close svg { width: 22px; height: 22px; }
+.nav-drawer-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; }
+.nav-drawer-menu a { display: block; padding: 16px 18px; font-size: 18px; font-weight: 600; color: var(--text); border-radius: 14px; }
+.nav-drawer-menu a:hover, .nav-drawer-menu a:active { background: rgba(255,89,37,0.08); color: var(--orange); }
+.nav-drawer-cta { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border); }
+@media (max-width: 768px) {
+  .ds-nav-menu { display: none !important; }
+  .ds-nav-right .btn--arrowbox { display: none; }
+  .nav-hamburger { display: inline-flex; }
+  body.no-scroll { overflow: hidden; }
+  .testimonials-grid, .testi-grid { display: flex !important; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; gap: 16px; margin: 0 -16px; padding: 8px 16px 24px; -webkit-overflow-scrolling: touch; }
+  .testimonials-grid > *, .testi-grid > * { scroll-snap-align: start; flex: 0 0 84%; min-width: 84%; }
+}
+
 </style>
 </head>
 <body data-variant="a">
@@ -992,8 +1024,11 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
   <!-- ============ NAV ============ -->
   <nav class="ds-nav">
     <div class="ds-nav-inner">
-      <a href="#hero" class="templum-logo" data-track="nav_logo">
-        <img src="../../assets/brand/logo-templum.png" alt="Templum Consultoria" width="120" height="26" decoding="async">
+      <a href="#hero" class="templum-logo" data-track="nav_logo" aria-label="Templum Consultoria">
+        <picture>
+          <source type="image/webp" srcset="../../assets/brand/logo-templum-240.webp 1x, ../../assets/brand/logo-templum-360.webp 1.5x">
+          <img src="../../assets/brand/logo-templum-240.png" srcset="../../assets/brand/logo-templum-240.png 1x, ../../assets/brand/logo-templum-360.png 1.5x" alt="Templum Consultoria" width="120" height="40" decoding="async">
+        </picture>
       </a>
       <ul class="ds-nav-menu">
         <li><a href="#beneficios" data-track="nav_link">Benefícios</a></li>
@@ -1006,9 +1041,37 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
           <span class="btn-arrowBox" aria-hidden="true"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
           <span class="btn-textBox"><span class="btn-textBox-label">Falar com especialista</span></span>
         </a>
+        <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-controls="nav-drawer" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="19" x2="20" y2="19"/></svg>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Drawer mobile -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="nav-drawer-head">
+      <picture>
+        <source type="image/webp" srcset="../../assets/brand/logo-templum-240.webp">
+        <img src="../../assets/brand/logo-templum-240.png" alt="Templum Consultoria" width="120" height="40" decoding="async">
+      </picture>
+      <button type="button" class="nav-drawer-close" id="nav-drawer-close" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+    <ul class="nav-drawer-menu">
+      <li><a href="#beneficios" data-track="nav_link_mobile">Benefícios</a></li>
+      <li><a href="#como-funciona" data-track="nav_link_mobile">Como funciona</a></li>
+      <li><a href="#garantia" data-track="nav_link_mobile">Garantia</a></li>
+      <li><a href="#depoimentos" data-track="nav_link_mobile">Depoimentos</a></li>
+    </ul>
+    <div class="nav-drawer-cta">
+      <a href="#lead-form" class="btn btn--primary btn--lg btn--block" data-track="cta_nav_mobile">
+        Falar com especialista
+        <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>
+      </a>
+    </div>
+  </div>
 
   <main id="conteudo">
 
@@ -1533,7 +1596,10 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
   <footer>
     <div class="container xl">
       <div class="footer-brand" style="margin-bottom: 32px;">
-        <img src="../../assets/brand/logo-templum-light.png" alt="Templum Consultoria" width="120" height="22" loading="lazy" decoding="async">
+        <picture>
+          <source type="image/webp" srcset="../../assets/brand/logo-templum-light-240.webp 1x, ../../assets/brand/logo-templum-light-360.webp 1.5x">
+          <img src="../../assets/brand/logo-templum-light-240.png" srcset="../../assets/brand/logo-templum-light-240.png 1x, ../../assets/brand/logo-templum-light-360.png 1.5x" alt="Templum Consultoria" width="120" height="40" loading="lazy" decoding="async">
+        </picture>
         <p>Templum Consultoria. A maior consultoria digital do Brasil em PBQP-H. 30 anos de experiência, +2.000 construtoras certificadas, garantia em contrato.</p>
       </div>
       <div class="footer-bottom">© 2025 Templum Consultoria. Todos os direitos reservados.</div>

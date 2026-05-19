@@ -50,4 +50,26 @@
     window.__pbqph.config.webhookUrl = "https://hook.us1.make.com/g29csjuy9bduidsymp2yeco9oa98u7mh";
     window.__pbqph.config.debug = false;
   }
+
+  // 5. Hamburguer mobile — abre/fecha drawer
+  const hamburger = document.getElementById("nav-hamburger");
+  const drawer = document.getElementById("nav-drawer");
+  const drawerClose = document.getElementById("nav-drawer-close");
+  function openDrawer() {
+    drawer?.classList.add("is-open");
+    hamburger?.setAttribute("aria-expanded", "true");
+    document.body.classList.add("no-scroll");
+    window.__pbqph?.track("nav_drawer_open");
+  }
+  function closeDrawer() {
+    drawer?.classList.remove("is-open");
+    hamburger?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("no-scroll");
+  }
+  hamburger?.addEventListener("click", openDrawer);
+  drawerClose?.addEventListener("click", closeDrawer);
+  // Fecha ao clicar em link interno
+  drawer?.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener("click", closeDrawer));
+  // Fecha com Esc
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeDrawer(); });
 })();
