@@ -22,7 +22,7 @@
       "villaramos.jpg",
     ];
     const html = logos
-      .map((src) => `<img src="../assets/clientes/${encodeURI(src)}" alt="" loading="lazy" decoding="async" width="140" height="44">`)
+      .map((src) => `<img src="../../assets/clientes/${encodeURI(src)}" alt="" loading="lazy" decoding="async" width="140" height="44">`)
       .join("");
     track.innerHTML = html + html;
   }

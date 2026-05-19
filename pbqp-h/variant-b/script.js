@@ -21,7 +21,7 @@
   const buildTrack = (id, list) => {
     const t = document.getElementById(id);
     if (!t) return;
-    const html = list.map((src) => `<img src="../assets/clientes/${encodeURI(src)}" alt="" loading="lazy" decoding="async" width="140" height="44">`).join("");
+    const html = list.map((src) => `<img src="../../assets/clientes/${encodeURI(src)}" alt="" loading="lazy" decoding="async" width="140" height="44">`).join("");
     t.innerHTML = html + html;
   };
 

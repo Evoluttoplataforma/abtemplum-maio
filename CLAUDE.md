@@ -1,6 +1,9 @@
-# abpbqphv1 — Landing page A/B test PBQP-H (Templum)
+# abtemplum-maio — A/B tests de landing pages (Templum)
 
-Projeto de teste A/B para uma landing page do produto **PBQP-H** da Templum.
+Projeto de A/B tests para landing pages de marketing da Templum. Cada norma tem sua pasta e dentro variantes (A, B, ...).
+
+Domínio: `mkt.templum.com.br`
+URL de produção (PBQP-H): `https://mkt.templum.com.br/pbqp-h/variant-a/`
 
 ## Stack
 - HTML/CSS/JS puro (sem framework)
@@ -11,32 +14,37 @@ Projeto de teste A/B para uma landing page do produto **PBQP-H** da Templum.
 ```
 assets/
   brand/        Logos e favicon da Templum
-  clientes/     Logos dos clientes PBQP-H (prova social)
-  images/       Imagens adicionais da página (hero, seções, etc.)
+  clientes/     Logos dos clientes (prova social)
+  images/       Imagens das páginas (hero, seções, etc.)
 references/
-  design-system-1.html   Referência de design system (usar para tokens, componentes)
-  design-system-2.html   Segunda referência de design system
+  design-system-1.html   Referência de design system
+  design-system-2.html   Segunda referência
 shared/
-  css/tokens.css         Variáveis CSS comuns às duas variantes (cores, tipografia, espaçamento)
-  js/analytics.js        Tracking comum (eventos, data-attributes)
-variant-a/      Variante A da landing
-  index.html
-  styles.css
-  script.js
-variant-b/      Variante B da landing
-  index.html
-  styles.css
-  script.js
+  js/analytics.js        Tracking comum (UTMs, click IDs, eventos)
+  js/form.js             Render + submit do formulário
+pbqp-h/         Norma PBQP-H
+  variant-a/      Variante A
+    index.html
+    styles.css
+    script.js
+  variant-b/      Variante B
+    index.html
+    styles.css
+    script.js
 content/        Textos/copy fornecidos pelo cliente
+index.html      Redirect / → /pbqp-h/variant-a/
+_headers        Cache + security headers (Cloudflare Pages)
 ```
+
+Para uma nova norma (ex: ISO-9001), criar `iso-9001/variant-a/`, `iso-9001/variant-b/` no mesmo padrão. Paths internos: `../../assets/`, `../../shared/`.
 
 ## Convenções para A/B
 - Cada CTA, formulário e ponto de conversão deve ter `data-track="<nome-do-evento>"` para a ferramenta de A/B conseguir medir.
 - O `<body>` de cada variante leva `data-variant="a"` ou `data-variant="b"`.
-- Estilos comuns vão em `shared/css/tokens.css`. Estilos específicos da variante ficam em `variant-x/styles.css`.
+- CSS específico fica em `<norma>/<variant-x>/styles.css` (cada variante self-contained com tokens DS2 inline).
 
 ## Como rodar localmente
 ```
 python3 -m http.server 8000
-# abrir http://localhost:8000/variant-a/ e http://localhost:8000/variant-b/
+# abrir http://localhost:8000/pbqp-h/variant-a/ e http://localhost:8000/pbqp-h/variant-b/
 ```
