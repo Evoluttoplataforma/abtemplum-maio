@@ -287,12 +287,27 @@
   }
 
   // ============ LEAD SUBMIT ============
+  function splitName(full) {
+    var clean = String(full || "").trim().replace(/\s+/g, " ");
+    if (!clean) return { firstname: "", lastname: "" };
+    var parts = clean.split(" ");
+    if (parts.length === 1) return { firstname: parts[0], lastname: "" };
+    return { firstname: parts[0], lastname: parts.slice(1).join(" ") };
+  }
+
   function submitLead(payload, opts) {
     opts = opts || {};
     var source = opts.source || "form";
     var event = opts.event || "lead_submit";
     var eventId = generateEventId();
     var pageStart = window.__pbqphStartTs || Date.now();
+
+    // Quebra "Nome completo" em firstname/lastname pra padrão CRM (HubSpot/RD/etc.)
+    var nameParts = splitName(payload && payload.name);
+    var enrichedPayload = Object.assign({}, payload, {
+      firstname: nameParts.firstname,
+      lastname: nameParts.lastname,
+    });
 
     var body = Object.assign({
       event: event,
@@ -301,7 +316,7 @@
       source: source,
       ts: Date.now(),
       time_on_page_at_submit: Math.round((Date.now() - pageStart) / 1000),
-    }, payload, getFirstTouchSnapshot(), getLastTouch(), getContext());
+    }, enrichedPayload, getFirstTouchSnapshot(), getLastTouch(), getContext());
 
     // Dispara no dataLayer com mesmo event_id pra dedupe Pixel/CAPI
     track(event, Object.assign({}, payload, { source: source, event_id: eventId }));
