@@ -139,9 +139,16 @@
         status.className = "form-status success";
         status.textContent = result.simulated
           ? "Recebido! (modo demo — sem webhook configurado)"
-          : "Recebido! Um especialista entra em contato em até 1 hora útil.";
+          : "Redirecionando...";
         form.reset();
         opts.onSuccess?.(data);
+        // Redireciona pra página de obrigado preservando query string (UTMs/click IDs)
+        // Pula em modo demo (sem webhook) pra facilitar inspeção local
+        if (!result.simulated) {
+          const thanksUrl = "/obrigado/" + (window.location.search || "");
+          setTimeout(function () { window.location.href = thanksUrl; }, 350);
+          return;
+        }
       } else {
         status.className = "form-status error";
         status.textContent = "Não conseguimos enviar. Tente novamente em alguns segundos.";
