@@ -21,8 +21,8 @@
       <span class="field-error">Informe um WhatsApp com DDD</span>
     </div>
     <div class="form-field form-field--full" data-field="empresa">
-      <label for="{id}-empresa">Nome da construtora</label>
-      <input id="{id}-empresa" name="empresa" type="text" autocomplete="organization" required minlength="2" placeholder="Razão social ou nome fantasia">
+      <label for="{id}-empresa">{empresaLabel}</label>
+      <input id="{id}-empresa" name="empresa" type="text" autocomplete="organization" required minlength="2" placeholder="{empresaPlaceholder}">
       <span class="field-error">Informe o nome da empresa</span>
     </div>
     <div class="form-field" data-field="funcionarios">
@@ -88,8 +88,13 @@
     const formId = opts.formId || container.dataset.formId || (source === "inline" ? "waitlist-form" : "waitlist-form-" + source);
     const id = "f-" + Math.random().toString(36).slice(2, 8);
     const submitLabel = opts.submitLabel || container.dataset.submitLabel || "Quero minha consultoria gratuita";
+    const empresaLabel = opts.empresaLabel || container.dataset.empresaLabel || "Nome da empresa";
+    const empresaPlaceholder = opts.empresaPlaceholder || container.dataset.empresaPlaceholder || "Razão social ou nome fantasia";
 
-    const fieldsHtml = FORM_FIELDS_HTML.replace(/\{id\}/g, id);
+    const fieldsHtml = FORM_FIELDS_HTML
+      .replace(/\{id\}/g, id)
+      .replace(/\{empresaLabel\}/g, empresaLabel)
+      .replace(/\{empresaPlaceholder\}/g, empresaPlaceholder);
     container.innerHTML = `
       <form class="form" id="${formId}" novalidate data-track="${event}">
         ${fieldsHtml}
