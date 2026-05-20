@@ -84,15 +84,30 @@
       font-size: clamp(15px, 1.6vw, 18px); color: var(--text-mid);
       line-height: 1.6; max-width: 520px; margin: 0 auto 32px;
     }
+    .video-stage {
+      position: relative;
+      border-radius: 28px;
+      padding: 28px;
+      margin: 0 auto 32px;
+      max-width: 460px;
+      background:
+        radial-gradient(120% 80% at 50% 0%, rgba(255,89,37,0.20) 0%, transparent 60%),
+        linear-gradient(160deg, #1b2330 0%, #131822 100%);
+      box-shadow: 0 24px 60px -20px rgba(24,25,27,0.45);
+    }
     .video-wrap {
-      position: relative; aspect-ratio: 16 / 9;
-      border-radius: 20px; overflow: hidden;
-      background: #000; margin: 0 auto 32px;
-      box-shadow: 0 20px 50px -20px rgba(24,25,27,0.25);
+      position: relative; aspect-ratio: 9 / 16;
+      border-radius: 18px; overflow: hidden;
+      background: #000;
+      box-shadow: 0 20px 40px -16px rgba(0,0,0,0.55);
     }
     .video-wrap iframe {
       position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%; border: none;
+      width: 100%; height: 100%; border: 0;
+    }
+    @media (max-width: 600px) {
+      .video-stage { padding: 14px; border-radius: 22px; max-width: 320px; }
+      .video-wrap { border-radius: 14px; }
     }
     .steps {
       background: #fff; border: 1px solid var(--border); border-radius: 20px;
@@ -344,8 +359,16 @@
       <h1>Recebemos seu <em>contato!</em></h1>
       <p class="lede">Um especialista da Templum vai te chamar pelo WhatsApp ou telefone que você informou. <strong>Assista ao vídeo abaixo</strong> enquanto isso pra entender como conduzimos cada certificação.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://player.vimeo.com/video/1146674999?h=3d82725084&autopause=0&player_id=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Conheça a Templum"></iframe>
+      <div class="video-stage">
+        <div class="video-wrap">
+          <iframe
+            src="https://player.vimeo.com/video/1146674999?h=3d82725084&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            loading="lazy"
+            title="Conheça a Templum"
+            allowfullscreen></iframe>
+        </div>
       </div>
 
       <div class="steps">
