@@ -110,12 +110,42 @@
     const whatsappInput = form.querySelector('input[name="whatsapp"]');
     attachWhatsappMask(whatsappInput);
 
+    // Snapshot global atualizado em tempo real — pra GTM JavaScript Variable
+    window.__pbqphFormData = window.__pbqphFormData || {};
+    function pushSnapshot() {
+      const data = Object.fromEntries(new FormData(form).entries());
+      const full = String(data.name || "").trim().replace(/\s+/g, " ");
+      const parts = full ? full.split(" ") : [];
+      const firstname = parts[0] || "";
+      const lastname = parts.slice(1).join(" ") || "";
+      const whats = data.whatsapp || "";
+      window.__pbqphFormData = {
+        name: full,
+        firstname: firstname,
+        lastname: lastname,
+        // aliases pt-BR (DLV / JSC no GTM)
+        nome: firstname,
+        sobrenome: lastname,
+        email: data.email || "",
+        whatsapp: whats,
+        phone: whats,
+        phoneNumber: whats,
+        telefone: whats,
+        empresa: data.empresa || "",
+        funcionarios: data.funcionarios || "",
+        faturamento: data.faturamento || "",
+      };
+    }
+    pushSnapshot();
+
     form.querySelectorAll(".form-field").forEach((field) => {
       const input = field.querySelector("input, select");
       input.addEventListener("blur", () => validateField(field));
       input.addEventListener("input", () => {
         if (field.classList.contains("has-error")) validateField(field);
+        pushSnapshot();
       });
+      input.addEventListener("change", pushSnapshot);
     });
 
     form.addEventListener("submit", async (e) => {
