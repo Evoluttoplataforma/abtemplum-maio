@@ -304,9 +304,17 @@
 
     // Quebra "Nome completo" em firstname/lastname pra padrão CRM (HubSpot/RD/etc.)
     var nameParts = splitName(payload && payload.name);
+    var whats = (payload && payload.whatsapp) || "";
     var enrichedPayload = Object.assign({}, payload, {
+      // padrão CRM internacional
       firstname: nameParts.firstname,
       lastname: nameParts.lastname,
+      phone: whats,
+      phoneNumber: whats,
+      // padrão CRM em pt-BR (pra DLV no GTM)
+      nome: nameParts.firstname,
+      sobrenome: nameParts.lastname,
+      telefone: whats,
     });
 
     var body = Object.assign({
@@ -319,7 +327,8 @@
     }, enrichedPayload, getFirstTouchSnapshot(), getLastTouch(), getContext());
 
     // Dispara no dataLayer com mesmo event_id pra dedupe Pixel/CAPI
-    track(event, Object.assign({}, payload, { source: source, event_id: eventId }));
+    // Inclui aliases pt-BR e CRM padrão pra facilitar DLV no GTM
+    track(event, Object.assign({}, enrichedPayload, { source: source, event_id: eventId }));
 
     // Persiste email/nome em cookie (pra Clarity e re-identificação)
     if (payload && payload.email) writeCookie("cookie_em", payload.email);
