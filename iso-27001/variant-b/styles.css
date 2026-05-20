@@ -1,56 +1,4 @@
-<!DOCTYPE html>
-<!-- build: 2026-05-19-r2 -->
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Certifique sua empresa na ISO&nbsp;9001 em até 90 dias. Garantia de 200% do investimento de volta. Templum, a consultoria digital nº 1 do Brasil em ISO&nbsp;9001. Planos a partir de R$ 1.900/mês com o Orbit (IA).">
-  <meta name="theme-color" content="#FF5925">
-  <title>ISO&nbsp;9001 em até 90 dias · Templum</title>
-  <link rel="icon" type="image/svg+xml" href="../../assets/brand/favicon.svg">
-
-  <!-- Performance: 3 preconnects críticos + dns-prefetch pro resto -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://code.iconify.design">
-  <link rel="dns-prefetch" href="https://player.vimeo.com">
-  <link rel="preload" as="image" href="../../assets/images/iso-processos-800.avif" imagesrcset="../../assets/images/iso-processos-800.avif 800w, ../../assets/images/iso-processos.avif 1254w" imagesizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px" type="image/avif" fetchpriority="high">
-
-  <!-- Fonte async (não-bloqueante) -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"></noscript>
-
-  <!-- Google Tag Manager (lazy via requestIdleCallback) -->
-  <script>
-  (function(){
-    function loadGTM(id){
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer',id);
-    }
-    function loadAll(){ loadGTM('GTM-WLFN684J'); loadGTM('GTM-WC3P2SNP'); }
-    // Carrega após o navegador ficar idle ou no primeiro clique/scroll, o que vier primeiro
-    var loaded=false;
-    function go(){ if(loaded) return; loaded=true; loadAll(); }
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(go, { timeout: 3500 });
-    } else {
-      setTimeout(go, 2500);
-    }
-    ['scroll','touchstart','mousemove','keydown','click'].forEach(function(ev){
-      window.addEventListener(ev, go, { once: true, passive: true });
-    });
-  })();
-  </script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Iconify (defer: não bloqueia parser) -->
-  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js" defer></script>
-
-  <style id="critical-css">
-/* Variante A — DS2 (Aura + Green-Museum) — clone fiel
+/* Variante B — DS2 (Aura + Green-Museum) — clone fiel
    Tokens DS2 inline. Font Montserrat carregada via <link> no HTML (não-bloqueante). */
 
 :root {
@@ -99,6 +47,21 @@
 
   /* Type */
   --font-sans: "Montserrat", "Montserrat Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Fallback font com métricas casadas com Montserrat — zera CLS no font swap */
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-display: swap;
+  ascent-override: 91.66%;
+  descent-override: 23.81%;
+  line-gap-override: 0%;
+  size-adjust: 104.31%;
+}
+
+:root {
+  --__unused: 0;
 
   /* Radii */
   --r-12: 12px; --r-16: 16px; --r-20: 20px; --r-24: 24px; --r-32: 32px; --r-40: 40px;
@@ -115,19 +78,6 @@
   --ease-soft: cubic-bezier(.22, 1, .36, 1);
   --ease-snap: cubic-bezier(.4, 0, .2, 1);
 }
-
-/* Fallback que evita CLS enquanto Montserrat carrega */
-@font-face {
-  font-family: "Montserrat Fallback";
-  src: local("Arial");
-  font-display: swap;
-  ascent-override: 91.66%;
-  descent-override: 23.81%;
-  line-gap-override: 0%;
-  size-adjust: 104.31%;
-}
-
-iconify-icon { display: inline-flex; width: 1em; height: 1em; }
 
 /* ============ RESET & BASE ============ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -981,642 +931,327 @@ footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,244,22
   .container { padding-left: 14px; padding-right: 14px; }
 }
 
+/* ============ VARIANT B — ADICIONAIS ============ */
+
+/* Carrossel horizontal de depoimentos (scroll-snap) */
+.testi-carousel {
+  position: relative;
+  margin-top: 32px;
+}
+.testi-carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,89,37,0.4) transparent;
+  padding: 8px 4px 24px;
+  margin: 0 -4px;
+  scroll-padding: 0 4px;
+}
+.testi-carousel-track::-webkit-scrollbar { height: 8px; }
+.testi-carousel-track::-webkit-scrollbar-track { background: transparent; }
+.testi-carousel-track::-webkit-scrollbar-thumb { background: rgba(255,89,37,0.3); border-radius: 999px; }
+.testi-carousel-track::-webkit-scrollbar-thumb:hover { background: rgba(255,89,37,0.5); }
+
+.testi-quote-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: transform .35s var(--ease-soft), border-color .35s var(--ease-soft);
+}
+.testi-quote-card:hover { transform: translateY(-3px); border-color: var(--border-2); }
+.testi-quote-card .stars {
+  display: inline-flex; gap: 2px; color: var(--yellow); font-size: 16px;
+}
+.testi-quote-card .quote-highlight {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: 19px; line-height: 1.25; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.testi-quote-card blockquote {
+  font-size: 14px; line-height: 1.6; color: var(--text-2);
+  margin: 0; font-weight: 400;
+}
+.testi-quote-card .author {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 12px; border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+.testi-quote-card .author-avatar {
+  width: 40px; height: 40px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--peach), var(--orange));
+  display: grid; place-items: center;
+  color: #fff; font-weight: 700; font-size: 14px;
+}
+.testi-quote-card .author-meta { display: flex; flex-direction: column; gap: 2px; }
+.testi-quote-card .author-name { font-weight: 600; font-size: 14px; color: var(--text); }
+.testi-quote-card .author-company { font-size: 12px; color: var(--text-mid); }
+
+.testi-anchor {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  display: flex; gap: 20px; align-items: center;
+  position: relative;
+}
+.testi-anchor::before {
+  content: "“"; position: absolute; top: -10px; left: 28px;
+  font-family: Georgia, serif; font-size: 80px; color: var(--orange);
+  line-height: 1; font-weight: 700;
+}
+.testi-anchor-content { padding-left: 56px; }
+.testi-anchor-quote {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 26px); line-height: 1.3; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 8px;
+}
+.testi-anchor-author { font-size: 13px; color: var(--text-mid); font-weight: 500; }
+
+@media (max-width: 1024px) {
+  .testi-quote-card { flex: 0 0 calc((100% - 20px) / 2); padding: 28px 24px; }
+}
+@media (max-width: 700px) {
+  .testi-quote-card { flex: 0 0 86%; padding: 24px 22px; }
+  .testi-quote-card .quote-highlight { font-size: 17px; }
+  .testi-anchor { flex-direction: column; align-items: flex-start; padding: 24px 22px; }
+  .testi-anchor-content { padding-left: 0; padding-top: 32px; }
+  .testi-anchor::before { left: 22px; top: -6px; font-size: 64px; }
+}
+
+/* Selo de credibilidade card (seção 5) */
+.selo-card {
+  background: linear-gradient(135deg, var(--cream), var(--peach-light));
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: clamp(40px, 5vw, 64px);
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.selo-card::before {
+  content: ""; position: absolute;
+  width: 320px; height: 320px; right: -80px; top: -80px;
+  background: radial-gradient(circle, rgba(255,89,37,0.18), transparent 60%);
+}
+.selo-card > * { position: relative; z-index: 1; }
+.selo-badge-image {
+  max-width: 360px; margin: 0 auto; width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  filter: drop-shadow(0 20px 40px rgba(255,89,37,0.22)) drop-shadow(0 8px 16px rgba(24,25,27,0.08));
+  animation: badge-float 6s ease-in-out infinite;
+}
+.selo-badge-image img {
+  width: 100%; height: auto; display: block;
+  max-width: 320px;
+}
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* DEPRECATED — selo-badge-visual (mantido para fallback) */
+.selo-badge-visual {
+  aspect-ratio: 1/1; max-width: 320px; margin: 0 auto; width: 100%;
+  background: var(--surface);
+  border-radius: 999px;
+  box-shadow: var(--shadow-lift);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 48px;
+  text-align: center;
+}
+.selo-badge-visual .badge-status { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--text-mid); text-transform: uppercase; margin-bottom: 12px; }
+.selo-badge-visual .badge-icon {
+  width: 80px; height: 80px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: var(--cream);
+  display: grid; place-items: center;
+  margin-bottom: 16px;
+}
+.selo-badge-visual .badge-icon iconify-icon { font-size: 40px; }
+.selo-badge-visual .badge-title { font-weight: 700; font-size: 18px; color: var(--text); letter-spacing: -0.015em; line-height: 1.2; }
+.selo-badge-visual .badge-subtitle { font-size: 12px; color: var(--text-mid); margin-top: 4px; }
+
+@media (max-width: 880px) {
+  .selo-card { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 32px 24px; }
+  .selo-badge-image { max-width: 240px; }
+  .selo-badge-image img { max-width: 220px; }
+  .selo-badge-visual { padding: 32px; max-width: 240px; }
+  .selo-badge-visual .badge-icon { width: 64px; height: 64px; }
+  .selo-badge-visual .badge-icon iconify-icon { font-size: 32px; }
+}
+
+/* Pilares (seção 13) */
+.pilares-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 880px) { .pilares-grid { grid-template-columns: 1fr; } }
+.pilar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: transform .35s var(--ease-soft), border-color .35s var(--ease-soft);
+}
+.pilar-card:hover { transform: translateY(-3px); border-color: var(--orange); }
+.pilar-card .pilar-num {
+  font-family: var(--font-sans); font-weight: 800;
+  font-size: 48px; line-height: 1; letter-spacing: -0.04em;
+  color: var(--orange);
+}
+.pilar-card h3 {
+  font-weight: 700; font-size: 22px; line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.pilar-card p { font-size: 15px; color: var(--text-2); line-height: 1.6; }
+
+/* Header CTA sticky (seção 0) — visual ligeiramente diferente do nav da A */
+.ds-nav.--variant-b { background: rgba(255, 250, 235, 0.92); }
+
+/* ============ VARIANT B — RESPONSIVE FIXES ============ */
+@media (max-width: 880px) {
+  .pilar-card { padding: 28px 24px; gap: 12px; }
+  .pilar-card .pilar-num { font-size: 40px; }
+  .pilar-card h3 { font-size: 20px; }
+  .pilar-card p { font-size: 14px; }
+  .selo-card h3 { font-size: clamp(22px, 4.5vw, 28px) !important; }
+}
+@media (max-width: 768px) {
+  .testi-anchor { padding: 22px 20px; }
+  .testi-anchor::before { font-size: 56px; left: 18px; top: -4px; }
+  .testi-anchor-content { padding-top: 28px; }
+  .testi-quote-card .quote-highlight { font-size: 16px; }
+  .testi-quote-card blockquote { font-size: 13px; }
+  .testi-quote-card .author-avatar { width: 36px; height: 36px; font-size: 13px; }
+  .testi-quote-card .author-name { font-size: 13px; }
+}
+@media (max-width: 600px) {
+  .testi-quote-card { flex: 0 0 90%; padding: 22px 20px; }
+  .pilar-card { padding: 24px 22px; }
+  .pilar-card .pilar-num { font-size: 36px; }
+  .pilar-card h3 { font-size: 18px; }
+  .selo-card { padding: 28px 20px; border-radius: 24px; }
+  .selo-badge-image { max-width: 200px; }
+  .selo-badge-image img { max-width: 180px; }
+  .testi-carousel-track { gap: 14px; }
+}
+@media (max-width: 480px) {
+  .testi-quote-card { flex: 0 0 92%; padding: 20px 18px; gap: 12px; }
+  .testi-quote-card .quote-highlight { font-size: 15px; }
+  .testi-quote-card blockquote { font-size: 13px; line-height: 1.55; }
+  .testi-anchor { padding: 20px 18px; }
+  .testi-anchor-quote { font-size: 16px; line-height: 1.35; }
+  .pilar-card { padding: 22px 20px; }
+  .pilar-card .pilar-num { font-size: 32px; }
+  .pilar-card h3 { font-size: 17px; }
+  .pilar-card p { font-size: 13px; }
+  .selo-card { padding: 24px 18px; gap: 24px; border-radius: 20px; }
+  .selo-badge-image { max-width: 180px; }
+  .selo-badge-image img { max-width: 160px; }
+}
+
+/* ============ MOBILE FIXES — pente fino responsivo ============ */
 img, picture, video, svg { max-width: 100%; }
+
+/* Grid 5 mobile */
 @media (max-width: 600px) {
   .grid-5 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .step-card { padding: 18px 18px; }
+}
+@media (max-width: 420px) {
+  .grid-5 { grid-template-columns: 1fr; }
+}
+
+/* Botões sem overflow */
+@media (max-width: 600px) {
   .btn { white-space: normal; text-align: center; max-width: 100%; }
   .btn--xl, .btn--lg { width: 100%; font-size: 15px; padding: 16px 22px; }
   .btn--arrowbox { display: flex; width: 100%; max-width: 100%; }
-  .btn--arrowbox .btn-textBox { flex: 1; min-width: 0; padding: 0 16px; }
+  .btn--arrowbox .btn-textBox { flex: 1; min-width: 0; padding: 0 16px; font-size: 14px; }
   .btn--arrowbox .btn-arrowBox { flex-shrink: 0; }
-  .hero h1, .hero-headline { word-break: break-word; overflow-wrap: anywhere; hyphens: auto; }
+  .cta-dark .btn { width: 100%; }
 }
-@media (max-width: 420px) { .grid-5 { grid-template-columns: 1fr; } }
-.nav-hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border-2); border-radius: 12px; cursor: pointer; color: var(--text); padding: 0; }
+
+/* Hero h1 + pill */
+@media (max-width: 600px) {
+  .hero h1, .hero-headline {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+  .hero-pill {
+    flex-wrap: wrap;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .hero-pill .text { font-size: 11px; line-height: 1.3; }
+}
+
+/* ============ NAV HAMBURGUER MOBILE ============ */
+.nav-hamburger {
+  display: none;
+  width: 44px; height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+}
 .nav-hamburger svg { width: 22px; height: 22px; }
-.nav-drawer { position: fixed; inset: 0; z-index: 100; display: none; flex-direction: column; background: var(--cream-2); padding: 24px; }
+
+.nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  background: var(--cream-2);
+  padding: 24px;
+}
 .nav-drawer.is-open { display: flex; }
-.nav-drawer-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-.nav-drawer-close { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border-2); border-radius: 12px; cursor: pointer; color: var(--text); padding: 0; }
+.nav-drawer-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 32px;
+}
+.nav-drawer-close {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid var(--border-2);
+  border-radius: 12px; cursor: pointer; color: var(--text);
+  padding: 0;
+}
 .nav-drawer-close svg { width: 22px; height: 22px; }
-.nav-drawer-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; }
-.nav-drawer-menu a { display: block; padding: 16px 18px; font-size: 18px; font-weight: 600; color: var(--text); border-radius: 14px; }
-.nav-drawer-menu a:hover, .nav-drawer-menu a:active { background: rgba(255,89,37,0.08); color: var(--orange); }
-.nav-drawer-cta { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border); }
+.nav-drawer-menu {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 4px; margin: 0; padding: 0;
+}
+.nav-drawer-menu a {
+  display: block; padding: 16px 18px;
+  font-size: 18px; font-weight: 600; color: var(--text);
+  border-radius: 14px; transition: background .2s;
+}
+.nav-drawer-menu a:hover, .nav-drawer-menu a:active {
+  background: rgba(255,89,37,0.08); color: var(--orange);
+}
+.nav-drawer-cta {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
 @media (max-width: 768px) {
   .ds-nav-menu { display: none !important; }
   .ds-nav-right .btn--arrowbox { display: none; }
   .nav-hamburger { display: inline-flex; }
   body.no-scroll { overflow: hidden; }
-  .testimonials-grid, .testi-grid { display: flex !important; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; gap: 16px; margin: 0 -16px; padding: 8px 16px 24px; -webkit-overflow-scrolling: touch; }
-  .testimonials-grid > *, .testi-grid > * { scroll-snap-align: start; flex: 0 0 84%; min-width: 84%; }
 }
 
+/* Esconde floating card no mobile (sobreposição com caption da hero image) */
 @media (max-width: 600px) { .hero-floatingCard { display: none !important; } }
-</style>
-</head>
-<body data-variant="a">
-
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLFN684J" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC3P2SNP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-  <!-- ============ NAV ============ -->
-  <nav class="ds-nav">
-    <div class="ds-nav-inner">
-      <a href="#hero" class="templum-logo" data-track="nav_logo" aria-label="Templum Consultoria">
-        <picture>
-          <source type="image/webp" srcset="../../assets/brand/logo-templum-240.webp 1x, ../../assets/brand/logo-templum-360.webp 1.5x">
-          <img src="../../assets/brand/logo-templum-240.png" srcset="../../assets/brand/logo-templum-240.png 1x, ../../assets/brand/logo-templum-360.png 1.5x" alt="Templum Consultoria" width="120" height="40" decoding="async">
-        </picture>
-      </a>
-      <ul class="ds-nav-menu">
-        <li><a href="#beneficios" data-track="nav_link">Benefícios</a></li>
-        <li><a href="#como-funciona" data-track="nav_link">Como funciona</a></li>
-        <li><a href="#garantia" data-track="nav_link">Garantia</a></li>
-        <li><a href="#depoimentos" data-track="nav_link">Depoimentos</a></li>
-      </ul>
-      <div class="ds-nav-right">
-        <a href="#lead-form" class="btn btn--arrowbox btn--sm" data-track="cta_nav" aria-label="Falar com especialista">
-          <span class="btn-arrowBox" aria-hidden="true"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
-          <span class="btn-textBox"><span class="btn-textBox-label">Falar com especialista</span></span>
-        </a>
-        <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-controls="nav-drawer" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="19" x2="20" y2="19"/></svg>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Drawer mobile -->
-  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
-    <div class="nav-drawer-head">
-      <picture>
-        <source type="image/webp" srcset="../../assets/brand/logo-templum-240.webp">
-        <img src="../../assets/brand/logo-templum-240.png" alt="Templum Consultoria" width="120" height="40" decoding="async">
-      </picture>
-      <button type="button" class="nav-drawer-close" id="nav-drawer-close" aria-label="Fechar menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      </button>
-    </div>
-    <ul class="nav-drawer-menu">
-      <li><a href="#beneficios" data-track="nav_link_mobile">Benefícios</a></li>
-      <li><a href="#como-funciona" data-track="nav_link_mobile">Como funciona</a></li>
-      <li><a href="#garantia" data-track="nav_link_mobile">Garantia</a></li>
-      <li><a href="#depoimentos" data-track="nav_link_mobile">Depoimentos</a></li>
-    </ul>
-    <div class="nav-drawer-cta">
-      <a href="#lead-form" class="btn btn--primary btn--lg btn--block" data-track="cta_nav_mobile">
-        Falar com especialista
-        <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>
-      </a>
-    </div>
-  </div>
-
-  <main id="conteudo">
-
-  <!-- ============ 1. HERO ============ -->
-  <section id="hero" class="hero">
-    <div class="container xl">
-      <div class="hero-grid">
-
-        <div class="hero-content">
-          <div class="hero-topBlock">
-            <div class="hero-pill">
-              <div class="avatars">
-                <span class="av">I</span>
-                <span class="av">S</span>
-                <span class="av">O</span>
-              </div>
-              <span class="text"><strong>+8.000 empresas</strong> certificadas pela Templum</span>
-            </div>
-
-            <h1 class="hero-headline">
-              Implemente a ISO&nbsp;9001 em <em>até 90 dias</em>.
-              Ou <em>200% de volta</em>.
-            </h1>
-
-            <p class="hero-subhead">
-              A consultoria digital nº 1 do Brasil em qualidade. Planos a partir de <strong>R$ 1.900/mês</strong> com o Orbit, nosso software com IA que padroniza processos, indica não conformidades e centraliza tudo. Certificação garantida em contrato.
-            </p>
-
-            <ul class="hero-bullets">
-              <li><span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>Certificação em até 90 dias seguindo cronograma da consultoria</li>
-              <li><span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>Software Orbit IA incluído — padroniza processos e SGQ</li>
-              <li><span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>Garantia contratual de 200% se não certificar</li>
-              <li><span class="check-circle"><iconify-icon icon="solar:check-read-linear"></iconify-icon></span>Proposta personalizada em até 24 horas, sem compromisso</li>
-            </ul>
-          </div>
-
-          <div class="hero-bottomBlock">
-            <div class="hero-actions">
-              <a href="#lead-form" class="btn btn--arrowbox" data-track="cta_hero_primary" aria-label="Falar com especialista">
-                <span class="btn-arrowBox" aria-hidden="true"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
-                <span class="btn-textBox">Falar com especialista agora</span>
-              </a>
-              <a href="#como-funciona" class="btn btn--ghost btn--lg" data-track="cta_hero_secondary">
-                Como funciona
-              </a>
-            </div>
-
-            <div class="hero-rating">
-              <div class="rating-avatars">
-                <span class="rating-av">R</span>
-                <span class="rating-av">M</span>
-                <span class="rating-av">J</span>
-              </div>
-              <div class="rating-block">
-                <div class="rating-stars" aria-label="4,9 de 5 estrelas">
-                  <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  <span class="rating-value">4,9</span>
-                </div>
-                <div class="rating-count">+174 avaliações no Google · +8.000 empresas certificadas</div>
-              </div>
-            </div>
-
-            <p class="hero-disclaimer">O prazo de 90 dias é o padrão para empresas com processos bem definidos. Empresas mais complexas: 120 a 180 dias. Receba sua proposta personalizada em até 24 horas.</p>
-          </div>
-        </div>
-
-        <div class="hero-imageCol">
-          <div class="hero-imageCard">
-            <picture>
-              <source type="image/avif" srcset="../../assets/images/iso-processos-800.avif 800w, ../../assets/images/iso-processos.avif 1254w" sizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px">
-              <source type="image/webp" srcset="../../assets/images/iso-processos-800.webp 800w, ../../assets/images/iso-processos.webp 1254w" sizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px">
-              <img src="../../assets/images/iso-processos.jpg" alt="Equipe em reunião com painel ISO&nbsp;9001 ao fundo" width="1254" height="1254" fetchpriority="high" decoding="async">
-            </picture>
-            <div class="hero-imageCaption">
-              <div>
-                <div class="label">Quem tem ISO&nbsp;9001</div>
-                <div class="title">cresce 27% mais.</div>
-              </div>
-              <a href="#lead-form" class="btn btn--icon" aria-label="Falar com especialista" data-track="cta_hero_image">
-                <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
-              </a>
-            </div>
-          </div>
-
-          <svg class="hero-seal" viewBox="0 0 140 140" aria-hidden="true">
-            <defs>
-              <path id="seal-path-a" d="M 70,70 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"/>
-            </defs>
-            <circle cx="70" cy="70" r="68" fill="#FF5925"/>
-            <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,244,221,0.45)" stroke-width="0.5"/>
-            <text font-family="Montserrat, sans-serif" font-weight="700" font-size="10.5" letter-spacing="2.4" fill="#FFF4DD">
-              <textPath href="#seal-path-a" startOffset="0">CERTIFIQUE · TEMPLUM · GARANTIA 200% · ISO&nbsp;9001 ·&#160;</textPath>
-            </text>
-            <text x="70" y="66" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="22" letter-spacing="-1" fill="#FFF4DD">200%</text>
-            <text x="70" y="84" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="600" font-size="8" letter-spacing="2" fill="#FFF4DD">DE VOLTA</text>
-          </svg>
-
-          <div class="hero-floatingCard">
-            <div class="icon-box">
-              <iconify-icon icon="solar:shield-check-bold"></iconify-icon>
-            </div>
-            <div class="floating-text">
-              <strong>Garantia em contrato</strong>
-              Única consultoria do Brasil que devolve 200%.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 2. DOR ============ -->
-  <section class="ds-section section-dor">
-    <div class="container xl">
-      <span class="ds-eyebrow">01 · O que você perde sem ISO&nbsp;9001</span>
-      <h2>Sem ISO&nbsp;9001, sua empresa <em>perde contratos todo mês</em>.</h2>
-      <p class="ds-lede">Cliente exigindo selo, licitação fechada, processo bagunçado. Veja o que está bloqueado para empresas não certificadas.</p>
-
-      <div class="grid grid-2" style="gap: 16px 32px;">
-        <ul class="check-list">
-          <li class="check-item">
-            <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
-            <span><strong>Licitações federais e estaduais</strong> exigem ISO&nbsp;9001 como pré-requisito</span>
-          </li>
-          <li class="check-item">
-            <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
-            <span><strong>Grandes contas corporativas</strong> pedem o selo antes de fechar contrato</span>
-          </li>
-          <li class="check-item">
-            <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
-            <span><strong>Cadeia de fornecedores</strong> de empresas certificadas filtra parceiros sem selo</span>
-          </li>
-        </ul>
-        <ul class="check-list">
-          <li class="check-item">
-            <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
-            <span><strong>Processos sem padrão</strong> geram retrabalho, perda de margem e cliente insatisfeito</span>
-          </li>
-          <li class="check-item">
-            <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
-            <span><strong>Concorrentes certificados</strong> cobram mais caro e fecham contratos maiores</span>
-          </li>
-          <li class="check-item">
-            <span class="check-cross"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></span>
-            <span>Cada mês sem o selo é <strong>credibilidade e receita perdidas</strong></span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="mt-8 text-center">
-        <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_dor">
-          Quero resolver isso agora
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 3. NÚMEROS ============ -->
-  <section class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">02 · Autoridade</span>
-      <h2>Por que <em>+8.000 empresas</em> escolheram a Templum.</h2>
-      <p class="ds-lede">30 anos atuando exclusivamente com sistemas de gestão de qualidade. A consultoria digital nº 1 do Brasil em ISO&nbsp;9001.</p>
-
-      <div class="grid grid-4">
-        <div class="stat-card">
-          <span class="label-caps">Empresas</span>
-          <div class="num"><em>+8.000</em></div>
-          <div class="lbl">clientes ativos em diversos segmentos.</div>
-        </div>
-        <div class="stat-card --orange">
-          <span class="label-caps">Cobertura</span>
-          <div class="num"><em>+800</em></div>
-          <div class="lbl">cidades no Brasil, Portugal e África.</div>
-        </div>
-        <div class="stat-card --navy">
-          <span class="label-caps">Experiência</span>
-          <div class="num"><em>+30</em></div>
-          <div class="lbl">anos com gestão de qualidade.</div>
-        </div>
-        <div class="stat-card">
-          <span class="label-caps">Avaliação</span>
-          <div class="num"><em>4,9</em>/5</div>
-          <div class="lbl">média no Google, +174 avaliações.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 4. BENEFÍCIOS ============ -->
-  <section id="beneficios" class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">03 · Por que certificar</span>
-      <h2>3 motivos para <em>não adiar</em> a certificação ISO&nbsp;9001.</h2>
-      <p class="ds-lede">Empresas que se certificam com a Templum faturam, em média, 27% mais.</p>
-
-      <div class="grid grid-3">
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:wallet-money-linear"></iconify-icon></div>
-          <div class="step-title">Garanta vendas e contratos</div>
-          <p class="step-text">A ISO&nbsp;9001 comprova a qualidade da gestão e evita que sua empresa perca contratos, licitações e oportunidades que exigem certificação.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:document-text-linear"></iconify-icon></div>
-          <div class="step-title">Implementação completa em até 90 dias</div>
-          <p class="step-text">Com cronogramas, checklists e automação pelo Orbit, toda a documentação é preenchida de forma rápida, garantindo sua certificação no menor tempo.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:graph-up-linear"></iconify-icon></div>
-          <div class="step-title">Passe pela auditoria sem risco</div>
-          <p class="step-text">Com acompanhamento humano constante e suporte especializado, sua empresa passa pela auditoria sem surpresas e mantém contratos estratégicos ativos.</p>
-        </div>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_beneficios">
-          Quero esses benefícios
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 5. POR QUE ESCOLHER A TEMPLUM ============ -->
-  <section class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">04 · Diferenciais</span>
-      <h2>A consultoria completa para certificar <em>sem burocracia</em>.</h2>
-      <p class="ds-lede">Suporte, tecnologia, plataforma e garantia. Quatro pilares que tiram a dor de cabeça do seu caminho.</p>
-
-      <div class="grid grid-2">
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:chat-round-line-linear"></iconify-icon></div>
-          <div class="step-title">Suporte técnico em tempo real</div>
-          <p class="step-text">Tire dúvidas com especialistas pelo chat com resposta em até 1 minuto. Sem fila, sem ticket. Quando você travar, tem alguém para destrinchar na hora.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:bolt-circle-bold-duotone"></iconify-icon></div>
-          <div class="step-title">Tecnologia que elimina burocracia</div>
-          <p class="step-text">O Orbit, nosso software com IA, automatiza documentos, mapeia não conformidades e reduz até 40% do tempo gasto em processos manuais.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:calendar-linear"></iconify-icon></div>
-          <div class="step-title">Plataforma 24h no seu ritmo</div>
-          <p class="step-text">Avance de madrugada, nos fins de semana, no horário que cabe na sua rotina. Orientação técnica e validação contínua em cada etapa.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num"><iconify-icon icon="solar:shield-check-linear"></iconify-icon></div>
-          <div class="step-title">Garantia contratual de 200%</div>
-          <p class="step-text">A única consultoria no Brasil que assina um contrato com essa garantia. Se você seguir o processo e não conseguir certificar, devolvemos o dobro.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 6. COMO FUNCIONA ============ -->
-  <section id="como-funciona" class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">05 · Passo a passo</span>
-      <h2>Como certificamos sua empresa em <em>7 passos</em>.</h2>
-      <p class="ds-lede">Método à prova de falhas. Você dita o ritmo, nós cuidamos da técnica.</p>
-
-      <div class="grid grid-3">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <div class="step-title">Cronograma sob medida</div>
-          <p class="step-text">Calculamos seu cronograma com base no diagnóstico da sua empresa. Passo a passo estruturado para atender todos os requisitos da ISO&nbsp;9001.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">2</div>
-          <div class="step-title">Documentos elaborados por nós</div>
-          <p class="step-text">Nunca delegamos para você o que deve ser feito por nós. Elaboramos todos os documentos alinhados à sua operação para você implementar com rapidez e sem retrabalho.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <div class="step-title">Checkpoints e ritmo</div>
-          <p class="step-text">Você dita o ritmo da implementação e passa por checkpoints de verificação obrigatórios com o consultor. Método à prova de falhas.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">4</div>
-          <div class="step-title">Especialista sempre que precisar</div>
-          <p class="step-text">Todos os dias em horário comercial você tira dúvidas com seu consultor em tempo real. Chat com resposta média em até 1 minuto.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">5</div>
-          <div class="step-title">Selo Reconhecido pelo Mercado</div>
-          <p class="step-text">Enquanto você implementa, emitimos um selo e um atestado para comprovar para o mercado o status da sua implementação. Não perca contratos durante o processo.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">6</div>
-          <div class="step-title">Garantia em contrato</div>
-          <p class="step-text">Se sua empresa passar por todos os processos e mesmo assim não conseguir a certificação, devolvemos 200% do seu investimento. Em contrato.</p>
-        </div>
-        <div class="step-card" style="grid-column: 1 / -1; max-width: 720px; margin: 0 auto;">
-          <div class="step-num">7</div>
-          <div class="step-title">Estrutura robusta</div>
-          <p class="step-text">Especialistas apaixonados pelo sucesso do cliente acompanhando você de perto, do diagnóstico ao certificado.</p>
-        </div>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_passos">
-          Quero certificar minha empresa
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 7. GARANTIA ============ -->
-  <section id="garantia" class="ds-section">
-    <div class="container xl">
-      <div class="cta-dark">
-        <span class="badge badge--orange-solid">Certificação garantida</span>
-        <h2 style="margin-top: 16px;">200% do seu investimento <em>de volta</em>. Em contrato.</h2>
-        <p>A única consultoria do Brasil que assume esse risco com você. Planos a partir de <strong>R$ 1.900/mês</strong> com o Orbit. Consultoria 100% digital com especialistas em ISO&nbsp;9001. Se sua equipe seguir cada etapa do processo e ainda assim a certificação não sair, devolvemos 200% do valor investido.</p>
-
-        <div class="reason">
-          <strong>Por que podemos oferecer isso?</strong>
-          <p>Porque em 30 anos e +8.000 empresas certificadas desenvolvemos um método à prova de falhas. Nossa confiança no processo é tão alta que colocamos o dobro do seu dinheiro na mesa.</p>
-        </div>
-
-        <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_garantia">
-          Garantir minha certificação
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 8. ORBIT ============ -->
-  <section class="ds-section">
-    <div class="container xl">
-      <div class="split-grid">
-        <div>
-          <span class="ds-eyebrow">06 · Tecnologia</span>
-          <h2>Automatizado, simplificado e certificado com o <em>Orbit</em>.</h2>
-          <p class="ds-lede">Organize processos complexos em fluxos claros e padronize sua gestão da qualidade com a plataforma de consultoria com IA exclusiva da Templum.</p>
-
-          <ul class="check-list" style="margin-bottom: 32px;">
-            <li class="check-item">
-              <span class="check-circle"><iconify-icon icon="solar:close-square-linear"></iconify-icon></span>
-              <span>Reduza em até <strong>85%</strong> os erros operacionais com visão completa dos processos</span>
-            </li>
-            <li class="check-item">
-              <span class="check-circle"><iconify-icon icon="solar:bolt-circle-bold-duotone"></iconify-icon></span>
-              <span>Aumente em até <strong>65%</strong> a produtividade com clareza de escopo e responsabilidades</span>
-            </li>
-            <li class="check-item">
-              <span class="check-circle"><iconify-icon icon="solar:graph-up-linear"></iconify-icon></span>
-              <span>Reduza em até <strong>80%</strong> o tempo de análise com KPIs em tempo real</span>
-            </li>
-            <li class="check-item">
-              <span class="check-circle"><iconify-icon icon="solar:document-text-linear"></iconify-icon></span>
-              <span>Documentos SGQ e Manual da Qualidade <strong>preenchidos automaticamente</strong></span>
-            </li>
-          </ul>
-
-          <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_orbit_full">
-            Conhecer o Orbit
-            <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-          </a>
-        </div>
-        <div class="image-card">
-          <span class="badge badge--cream floating-badge">Orbit · plataforma</span>
-          <picture>
-            <source type="image/avif" srcset="../../assets/images/iso-gestao-800.avif 800w, ../../assets/images/iso-gestao.avif 1254w" sizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px">
-            <source type="image/webp" srcset="../../assets/images/iso-gestao-800.webp 800w, ../../assets/images/iso-gestao.webp 1254w" sizes="(max-width: 768px) 92vw, (max-width: 1200px) 50vw, 600px">
-            <img src="../../assets/images/iso-gestao.jpg" alt="Pasta ISO 9001 Sistema de Gestão da Qualidade sobre mesa" width="1254" height="1254" loading="lazy" decoding="async">
-          </picture>
-          <div class="caption">
-            <span class="label">Velocidade</span>
-            <span class="title">documentos prontos no dia 1.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 9. LOGOS ============ -->
-  <section class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">07 · Quem confia</span>
-      <h2>Empresas que <em>já conquistaram</em> a ISO&nbsp;9001 com a Templum.</h2>
-      <p class="ds-lede">De pequenas empresas a grandes operações. Mais de 8.000 clientes ativos em diversos segmentos.</p>
-    </div>
-    <div class="logos-marquee">
-      <div class="logos-track" id="logos-track"></div>
-    </div>
-  </section>
-
-  <!-- ============ 10. DEPOIMENTOS ============ -->
-  <section id="depoimentos" class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">08 · Resultado</span>
-      <h2>Empresas certificadas faturam, em média, <em>27% mais</em>.</h2>
-      <p class="ds-lede">Veja os cases de quem já conquistou a ISO&nbsp;9001 com a Templum.</p>
-
-      <div class="grid grid-2">
-        <article class="testi-card">
-          <div class="testi-video">
-            <iframe src="https://player.vimeo.com/video/106970851?badge=0&autopause=0&player_id=0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Como a ISO&nbsp;9001 ajuda a APAE a captar mais recursos"></iframe>
-          </div>
-          <div class="testi-body">
-            <span class="badge badge--success"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> Case ISO&nbsp;9001</span>
-            <blockquote>"Com a ISO&nbsp;9001, a APAE fortaleceu sua credibilidade institucional e ganhou consistência junto a patrocinadores, órgãos públicos e financiadores. O reconhecimento facilitou a captação de recursos e parcerias."</blockquote>
-            <cite>APAE · Terceiro setor</cite>
-          </div>
-        </article>
-        <article class="testi-card">
-          <div class="testi-video">
-            <iframe src="https://player.vimeo.com/video/96082864?badge=0&autopause=0&player_id=0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="ISO&nbsp;9001 em escritórios de advocacia"></iframe>
-          </div>
-          <div class="testi-body">
-            <span class="badge badge--success"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> Case ISO&nbsp;9001</span>
-            <blockquote>"Como a ISO&nbsp;9001 transformou a gestão de um escritório de advocacia. Processos padronizados, mais confiança do cliente e novas oportunidades de mercado."</blockquote>
-            <cite>Case · Escritório de Advocacia</cite>
-          </div>
-        </article>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_depoimentos">
-          Ver como funciona para mim
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 11. VANTAGENS ============ -->
-  <section class="ds-section">
-    <div class="container xl">
-      <span class="ds-eyebrow">09 · O que muda</span>
-      <h2>O que muda na sua empresa depois da <em>ISO&nbsp;9001</em>.</h2>
-      <p class="ds-lede">Resultado concreto para quem coloca o processo em prática.</p>
-
-      <div class="grid grid-5">
-        <div class="step-card" style="min-height:auto">
-          <div class="step-num"><iconify-icon icon="solar:folder-with-files-linear"></iconify-icon></div>
-          <div class="bold-l">Organização</div>
-          <p class="reg-m">Processos padronizados, equipe alinhada do planejamento à entrega.</p>
-        </div>
-        <div class="step-card" style="min-height:auto">
-          <div class="step-num"><iconify-icon icon="solar:document-text-linear"></iconify-icon></div>
-          <div class="bold-l">Contratos</div>
-          <p class="reg-m">Licitações federais, estaduais e grandes contas habilitadas.</p>
-        </div>
-        <div class="step-card" style="min-height:auto">
-          <div class="step-num"><iconify-icon icon="solar:chart-2-linear"></iconify-icon></div>
-          <div class="bold-l">Margem maior</div>
-          <p class="reg-m">Menos retrabalho, menos desperdício, mais controle.</p>
-        </div>
-        <div class="step-card" style="min-height:auto">
-          <div class="step-num"><iconify-icon icon="solar:medal-star-linear"></iconify-icon></div>
-          <div class="bold-l">Credibilidade</div>
-          <p class="reg-m">Sua empresa entra em propostas que antes não chegavam.</p>
-        </div>
-        <div class="step-card" style="min-height:auto">
-          <div class="step-num"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon></div>
-          <div class="bold-l">Equipe</div>
-          <p class="reg-m">Treinamentos estruturados, ambiente mais profissional.</p>
-        </div>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href="#lead-form" class="btn btn--primary btn--lg" data-track="cta_vantagens">
-          Quero essas vantagens
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-      </div>
-    </div>
-
-    <div class="marquee mt-12">
-      <div class="marquee-track" id="marquee-tags">
-        <span>SGQ completo</span><span class="dot"></span>
-        <span class="--orange">Manual da Qualidade</span><span class="dot"></span>
-        <span>Procedimentos padronizados</span><span class="dot"></span>
-        <span class="--orange">Auditoria interna</span><span class="dot"></span>
-        <span>Selo de implementação</span><span class="dot"></span>
-        <span class="--orange">Indicadores em painel</span><span class="dot"></span>
-        <span>Atestados oficiais</span><span class="dot"></span>
-        <span class="--orange">Garantia em contrato</span><span class="dot"></span>
-        <span>Suporte 1:1</span><span class="dot"></span>
-        <span class="--orange">Não conformidades mapeadas</span><span class="dot"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 14. LEAD FORM ============ -->
-  <section id="lead-form" class="ds-section section-lead">
-    <div class="container xl">
-      <span class="ds-eyebrow" style="display:flex; justify-content:center; margin-left:auto; margin-right:auto;">Consultoria gratuita</span>
-      <div class="form-wrap">
-        <h2 class="text-center">Descubra o que falta para sua empresa <em>ser certificada</em>.</h2>
-        <p class="ds-lede text-center" style="margin-left:auto; margin-right:auto;">Preencha abaixo. Você recebe sua proposta personalizada em até 24 horas. Sem compromisso.</p>
-        <div data-form="lead" data-form-source="inline" data-submit-label="Quero minha consultoria gratuita"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 17. CTA FINAL ============ -->
-  <section class="ds-section section-final">
-    <div class="container xl">
-      <div class="cta-dark">
-        <span class="badge badge--orange-solid">Última chamada</span>
-        <h2 style="margin-top: 16px;">Sua concorrente já tem a ISO&nbsp;9001. <em>E você?</em></h2>
-        <p>Cada mês sem certificação é um contrato que outra empresa fecha no seu lugar. Uma licitação que você nem entra. Um cliente grande que escolhe outro fornecedor.</p>
-        <p><strong>+8.000 empresas</strong> já conquistaram a ISO&nbsp;9001 com a Templum. Planos a partir de R$ 1.900/mês com garantia de 200% de volta.</p>
-
-        <a href="#lead-form" class="btn btn--primary btn--xl" data-track="cta_final">
-          Falar com especialista agora
-          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
-        </a>
-        <p class="reg-m" style="margin-top: 16px; color: rgba(255,244,221,0.6);">Atendimento gratuito · Sem compromisso · +8.000 empresas certificadas</p>
-      </div>
-    </div>
-  </section>
-
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer>
-    <div class="container xl">
-      <div class="footer-brand" style="margin-bottom: 32px;">
-        <picture>
-          <source type="image/webp" srcset="../../assets/brand/logo-templum-light-240.webp 1x, ../../assets/brand/logo-templum-light-360.webp 1.5x">
-          <img src="../../assets/brand/logo-templum-light-240.png" srcset="../../assets/brand/logo-templum-light-240.png 1x, ../../assets/brand/logo-templum-light-360.png 1.5x" alt="Templum Consultoria" width="120" height="40" loading="lazy" decoding="async">
-        </picture>
-        <p>Templum Consultoria. A maior consultoria digital do Brasil em ISO&nbsp;9001. 30 anos de experiência, +8.000 empresas certificadas, garantia em contrato.</p>
-      </div>
-      <div class="footer-bottom">© 2025 Templum Consultoria. Todos os direitos reservados.</div>
-    </div>
-  </footer>
-
-  <!-- Scripts (defer não-bloqueante) -->
-  <script src="../../shared/js/analytics.js?v=20260520a" defer></script>
-  <script src="../../shared/js/form.js?v=20260520a" defer></script>
-  <script src="script.js?v=20260520a" defer></script>
-</body>
-</html>

@@ -39,14 +39,13 @@
       <span class="field-error">Escolha a faixa de funcionários</span>
     </div>
     <div class="form-field" data-field="faturamento">
-      <label for="{id}-faturamento">Faturamento anual</label>
+      <label for="{id}-faturamento">Faturamento mensal</label>
       <select id="{id}-faturamento" name="faturamento" required>
         <option value="">Selecione...</option>
-        <option value="Até R$ 500 mil">Até R$ 500 mil</option>
-        <option value="R$ 500 mil a R$ 2 milhões">R$ 500 mil a R$ 2 milhões</option>
-        <option value="R$ 2 milhões a R$ 10 milhões">R$ 2 milhões a R$ 10 milhões</option>
-        <option value="R$ 10 milhões a R$ 50 milhões">R$ 10 milhões a R$ 50 milhões</option>
-        <option value="Acima de R$ 50 milhões">Acima de R$ 50 milhões</option>
+        <option value="Até R$ 100 mil">Até R$ 100 mil</option>
+        <option value="R$ 100 mil a R$ 500 mil">R$ 100 mil a R$ 500 mil</option>
+        <option value="R$ 500 mil a R$ 1 milhão">R$ 500 mil a R$ 1 milhão</option>
+        <option value="Acima de R$ 1 milhão">Acima de R$ 1 milhão</option>
       </select>
       <span class="field-error">Escolha a faixa de faturamento</span>
     </div>

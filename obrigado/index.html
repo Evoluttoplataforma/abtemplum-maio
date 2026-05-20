@@ -84,6 +84,16 @@
       font-size: clamp(15px, 1.6vw, 18px); color: var(--text-mid);
       line-height: 1.6; max-width: 520px; margin: 0 auto 32px;
     }
+    .video-wrap {
+      position: relative; aspect-ratio: 16 / 9;
+      border-radius: 20px; overflow: hidden;
+      background: #000; margin: 0 auto 32px;
+      box-shadow: 0 20px 50px -20px rgba(24,25,27,0.25);
+    }
+    .video-wrap iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none;
+    }
     .steps {
       background: #fff; border: 1px solid var(--border); border-radius: 20px;
       padding: 28px 32px; margin-bottom: 32px; text-align: left;
@@ -332,18 +342,22 @@
         <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
       </div>
       <h1>Recebemos seu <em>contato!</em></h1>
-      <p class="lede">Um especialista da Templum vai te chamar pelo WhatsApp ou telefone que você informou.</p>
+      <p class="lede">Um especialista da Templum vai te chamar pelo WhatsApp ou telefone que você informou. <strong>Assista ao vídeo abaixo</strong> enquanto isso pra entender como conduzimos cada certificação.</p>
+
+      <div class="video-wrap">
+        <iframe src="https://player.vimeo.com/video/1146674999?h=3d82725084&autopause=0&player_id=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Conheça a Templum"></iframe>
+      </div>
 
       <div class="steps">
         <h2>O que acontece agora</h2>
         <ol>
           <li>Seu cadastro foi enviado para nosso time de especialistas.</li>
           <li>Você receberá uma ligação ou mensagem no WhatsApp informado.</li>
-          <li>O especialista vai entender sua construtora e montar um diagnóstico gratuito.</li>
+          <li>O especialista vai entender sua empresa e montar um diagnóstico gratuito.</li>
         </ol>
       </div>
 
-      <p class="lede" style="margin-bottom:0;font-size:14px;">Enquanto isso, fique atento ao WhatsApp.</p>
+      <p class="lede" style="margin-bottom:0;font-size:14px;">Fique atento ao WhatsApp.</p>
     </div>
   </main>
 
