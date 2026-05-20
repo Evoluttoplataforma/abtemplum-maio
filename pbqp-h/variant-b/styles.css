@@ -1273,3 +1273,8 @@ footer .footer-bottom { margin-top: 16px; }
   .hero-headline { font-size: 22px !important; }
   .hero-subhead { font-size: 13px !important; }
 }
+
+/* Mobile nav alignment — logo esquerda, hamburguer direita */
+@media (max-width: 768px) {
+  .ds-nav-right { margin-left: auto !important; gap: 0; }
+}

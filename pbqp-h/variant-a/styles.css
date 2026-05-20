@@ -1051,3 +1051,8 @@ img, picture, video, svg { max-width: 100%; }
 footer .footer-brand { margin-bottom: 40px !important; }
 footer .footer-brand p { max-width: 560px; }
 footer .footer-bottom { margin-top: 16px; }
+
+/* Mobile nav alignment — logo esquerda, hamburguer direita */
+@media (max-width: 768px) {
+  .ds-nav-right { margin-left: auto !important; gap: 0; }
+}
