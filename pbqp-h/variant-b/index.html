@@ -1237,6 +1237,17 @@ img, picture, video, svg { max-width: 100%; }
 }
 
 @media (max-width: 600px) { .hero-floatingCard { display: none !important; } }
+@media (max-width: 480px) {
+  .hero-headline { font-size: clamp(24px, 7.2vw, 30px) !important; line-height: 1.1; letter-spacing: -0.025em; }
+  .hero-subhead { font-size: 14px !important; line-height: 1.5; }
+  .hero-content .paragraph { font-size: 14px; line-height: 1.55; }
+  .hero-pill, .badge--orange { white-space: normal !important; line-height: 1.3; max-width: 100%; }
+  .badge--orange { font-size: 10px; padding: 6px 10px; }
+}
+@media (max-width: 360px) {
+  .hero-headline { font-size: 22px !important; }
+  .hero-subhead { font-size: 13px !important; }
+}
 </style>
 </head>
 <body data-variant="b">
@@ -1867,8 +1878,8 @@ img, picture, video, svg { max-width: 100%; }
   </footer>
 
   <!-- Scripts (defer não-bloqueante) -->
-  <script src="../../shared/js/analytics.js?v=20260520g" defer></script>
-  <script src="../../shared/js/form.js?v=20260520g" defer></script>
-  <script src="script.js?v=20260520g" defer></script>
+  <script src="../../shared/js/analytics.js?v=20260520h" defer></script>
+  <script src="../../shared/js/form.js?v=20260520h" defer></script>
+  <script src="script.js?v=20260520h" defer></script>
 </body>
 </html>
