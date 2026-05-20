@@ -425,7 +425,7 @@
         </div>
       </div>
 
-      <div class="video-stage">
+      <div class="video-stage" id="thanks-video">
         <div class="video-wrap">
           <iframe
             src="https://player.vimeo.com/video/1146674999?h=3d82725084&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1"
@@ -568,6 +568,15 @@
       const skipBtn = document.getElementById("live-skip");
       const closeBtn = document.getElementById("live-close");
       const status = document.getElementById("live-status");
+
+      // Esconde o vídeo institucional quando o lead veio da ISO 27001
+      // (norma B2B/enterprise — vídeo curto sobre construtora não combina)
+      if (lead && lead.norm_slug === "iso-27001") {
+        const video = document.getElementById("thanks-video");
+        if (video) video.remove();
+        const heading = document.querySelector(".card .lede");
+        if (heading) heading.innerHTML = "Recebemos suas informações com sucesso. Nossa equipe de especialistas entrará em contato com você em breve.";
+      }
 
       function openModal() {
         if (!modal || modal.open) return;
