@@ -324,7 +324,7 @@
       source: source,
       ts: Date.now(),
       time_on_page_at_submit: Math.round((Date.now() - pageStart) / 1000),
-    }, enrichedPayload, getFirstTouchSnapshot(), getLastTouch(), getContext());
+    }, enrichedPayload, getFirstTouchSnapshot(), getLastTouch(), getContext(), getGeoSnapshot());
 
     // Dispara no dataLayer com mesmo event_id pra dedupe Pixel/CAPI
     // Inclui aliases pt-BR e CRM padrão pra facilitar DLV no GTM
@@ -438,6 +438,41 @@
     }, 30000);
   }
 
+  // ============ GEO IP (ipwho.is — gratuito, HTTPS, CORS aberto, sem key) ============
+  function pushGeoToDataLayer(geo) {
+    window.__pbqphGeo = geo;
+    (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: "geo_loaded" }, geo));
+  }
+  function loadGeo() {
+    try {
+      var cached = sessionStorage.getItem("__pbqph_geo");
+      if (cached) { pushGeoToDataLayer(JSON.parse(cached)); return; }
+    } catch (e) {}
+    fetch("https://ipwho.is/", { mode: "cors" })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data || data.success === false) return;
+        var geo = {
+          geo_country: data.country_code || "",
+          geo_country_name: data.country || "",
+          geo_state: data.region_code || "",
+          geo_state_name: data.region || "",
+          geo_city: data.city || "",
+          geo_zip: data.postal || "",
+          geo_ip: data.ip || "",
+        };
+        try { sessionStorage.setItem("__pbqph_geo", JSON.stringify(geo)); } catch (e) {}
+        pushGeoToDataLayer(geo);
+      })
+      .catch(function (err) { if (config.debug) console.log("[geo] err:", err); });
+  }
+  function getGeoSnapshot() {
+    try {
+      var cached = sessionStorage.getItem("__pbqph_geo");
+      return cached ? JSON.parse(cached) : (window.__pbqphGeo || {});
+    } catch (e) { return window.__pbqphGeo || {}; }
+  }
+
   // ============ PAGE VIEW ============
   function pushPageView() {
     var ctx = getContext();
@@ -460,6 +495,7 @@
     initClarity();
     initScrollDepth();
     initTimeOnPage();
+    loadGeo();
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
