@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Recebemos seu contato. Um especialista da Templum entra em contato em breve.">
+  <meta name="description" content="Obrigado pelo seu interesse! Recebemos suas informações com sucesso. Nossa equipe de especialistas entrará em contato com você em breve.">
   <meta name="theme-color" content="#FF5925">
   <title>Recebido · Templum</title>
   <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
@@ -102,6 +102,27 @@
       font-size: clamp(15px, 1.6vw, 18px); color: var(--text-mid);
       line-height: 1.6; max-width: 520px; margin: 0 auto 32px;
     }
+    .trust-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 12px; margin: -8px auto 32px; max-width: 560px;
+    }
+    .trust-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 999px; padding: 10px 18px 10px 12px;
+      box-shadow: 0 6px 18px -10px rgba(24,25,27,0.18);
+    }
+    .trust-ico {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(22,163,74,0.12); color: var(--success);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-ico svg { width: 18px; height: 18px; }
+    .trust-ico--star { background: rgba(255,89,37,0.12); color: var(--orange); }
+    .trust-text { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+    .trust-text strong { font-size: 15px; font-weight: 800; color: var(--text); }
+    .trust-text span { font-size: 12px; color: var(--text-mid); font-weight: 500; }
     .video-stage {
       position: relative;
       border-radius: 28px;
@@ -337,6 +358,12 @@
       .check svg { width: 36px; height: 36px; }
       h1 { font-size: clamp(24px, 7vw, 32px); }
       .lede { font-size: 14px; }
+      .trust-row { gap: 8px; margin-bottom: 24px; }
+      .trust-badge { padding: 8px 14px 8px 10px; gap: 10px; }
+      .trust-ico { width: 28px; height: 28px; }
+      .trust-ico svg { width: 16px; height: 16px; }
+      .trust-text strong { font-size: 14px; }
+      .trust-text span { font-size: 11px; }
 
       .live-modal { width: calc(100% - 16px); border-radius: 18px; max-height: 92vh; overflow-y: auto; }
       .live-hero { height: 130px; }
@@ -374,8 +401,29 @@
       <div class="check" aria-hidden="true">
         <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
       </div>
-      <h1>Recebemos seu <em>contato!</em></h1>
-      <p class="lede">Um especialista da Templum vai te chamar pelo WhatsApp ou telefone que você informou. <strong>Assista ao vídeo abaixo</strong> enquanto isso pra entender como conduzimos cada certificação.</p>
+      <h1>Obrigado pelo seu <em>interesse!</em></h1>
+      <p class="lede">Recebemos suas informações com sucesso. Nossa equipe de especialistas entrará em contato com você em breve. <strong>Assista ao vídeo abaixo</strong> enquanto isso.</p>
+
+      <div class="trust-row">
+        <div class="trust-badge">
+          <span class="trust-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+          </span>
+          <div class="trust-text">
+            <strong>+8.000</strong>
+            <span>empresas certificadas</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-ico trust-ico--star" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14.6 9.2 L22 9.7 L16.3 14.4 L18.2 22 L12 17.9 L5.8 22 L7.7 14.4 L2 9.7 L9.4 9.2 Z"/></svg>
+          </span>
+          <div class="trust-text">
+            <strong>4,9</strong>
+            <span>no Google</span>
+          </div>
+        </div>
+      </div>
 
       <div class="video-stage">
         <div class="video-wrap">
