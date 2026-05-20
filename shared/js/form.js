@@ -83,7 +83,7 @@
 
   function buildForm(container, opts = {}) {
     const source = opts.source || container.dataset.formSource || "inline";
-    const event = opts.event || (source === "modal" ? "form_modal_submit" : "form_inline_submit");
+    const event = opts.event || "form_submit_success";
     const formId = opts.formId || container.dataset.formId || (source === "inline" ? "waitlist-form" : "waitlist-form-" + source);
     const id = "f-" + Math.random().toString(36).slice(2, 8);
     const submitLabel = opts.submitLabel || container.dataset.submitLabel || "Quero minha consultoria gratuita";
